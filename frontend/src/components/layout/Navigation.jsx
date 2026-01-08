@@ -4,7 +4,7 @@ import { Menu, X } from 'lucide-react';
 import { Button } from '../ui/button';
 import { cn } from '../../lib/utils';
 
-const LOGO_URL = 'https://customer-assets.emergentagent.com/job_dc18cf70-9386-4e39-911c-3d5751a5e263/artifacts/w3j92dmq_lmk-logo.png';
+const LOGO_URL = '/lmk-logo.png';
 
 const navItems = [
   { label: 'Home', href: '#home' },
@@ -22,7 +22,7 @@ export const Navigation = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-      
+
       // Update active section based on scroll position
       const sections = navItems.map(item => item.href.substring(1));
       for (const section of sections.reverse()) {

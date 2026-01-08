@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Github, Linkedin, Twitter } from 'lucide-react';
 
-const LOGO_URL = 'https://customer-assets.emergentagent.com/job_dc18cf70-9386-4e39-911c-3d5751a5e263/artifacts/w3j92dmq_lmk-logo.png';
+const LOGO_URL = '/lmk-logo.png';
 
 const footerLinks = {
   services: [
@@ -37,7 +37,7 @@ export const Footer = () => {
     <footer className="relative bg-card/50 border-t border-border/50">
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent pointer-events-none" />
-      
+
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           {/* Brand Section */}
@@ -54,29 +54,29 @@ export const Footer = () => {
               />
             </motion.a>
             <p className="mt-4 text-muted-foreground max-w-sm">
-              Transforming ideas into digital reality. We create innovative websites, 
+              Transforming ideas into digital reality. We create innovative websites,
               mobile apps, and software solutions that drive business growth.
             </p>
-            
+
             {/* Contact Info */}
             <div className="mt-6 space-y-3">
               <a
-                href="mailto:contact@lmktechnology.com"
+                href="mailto:kishorepa64@gmail.com"
                 className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors"
               >
                 <Mail size={18} className="text-primary" />
-                contact@lmktechnology.com
+                kishorepa64@gmail.com
               </a>
               <a
-                href="tel:+919876543210"
+                href="tel:+916374308218"
                 className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors"
               >
                 <Phone size={18} className="text-secondary" />
-                +91 98765 43210
+                +91 6374308218
               </a>
               <div className="flex items-center gap-3 text-muted-foreground">
                 <MapPin size={18} className="text-pink" />
-                Bangalore, India
+                Nagercoil, Tamil Nadu, India
               </div>
             </div>
           </div>
@@ -138,7 +138,7 @@ export const Footer = () => {
           <p className="text-sm text-muted-foreground">
             © {currentYear} LMK Technology. All rights reserved. Developed by Kishore L M.
           </p>
-          
+
           {/* Social Links */}
           <div className="flex items-center gap-4">
             {socialLinks.map((social) => (

@@ -4,7 +4,7 @@ import { ChevronDown, Sparkles, Code2, Smartphone, Server } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 
-const LOGO_URL = 'https://customer-assets.emergentagent.com/job_dc18cf70-9386-4e39-911c-3d5751a5e263/artifacts/w3j92dmq_lmk-logo.png';
+const LOGO_URL = '/lmk-logo.png';
 
 export const HeroSection = () => {
   const containerRef = useRef(null);
@@ -31,7 +31,7 @@ export const HeroSection = () => {
       <div className="absolute inset-0">
         {/* Grid Pattern */}
         <div className="absolute inset-0 grid-bg opacity-30" />
-        
+
         {/* Gradient Orbs */}
         <motion.div
           className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full"
@@ -148,8 +148,8 @@ export const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="mt-6 text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed"
           >
-            We specialize in Website, App & Software Development. 
-            Transform your vision into reality with cutting-edge technology 
+            We specialize in Website, App & Software Development.
+            Transform your vision into reality with cutting-edge technology
             and exceptional design by Kishore L M.
           </motion.p>
 
