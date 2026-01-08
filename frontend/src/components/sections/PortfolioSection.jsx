@@ -7,13 +7,14 @@ import { Button } from '../ui/button';
 const projects = [
   {
     id: 1,
-    title: 'E-Commerce Platform',
+    title: 'Church Website',
     category: 'Website',
-    description: 'A full-featured e-commerce platform with payment integration, inventory management, and admin dashboard.',
+    description: 'A modern church website designed to share worship services, church activities, announcements, and faith-based content.',
     image: 'https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwxfHx3ZWIlMjBkZXZlbG9wbWVudCUyMGNvZGluZ3xlbnwwfHx8fDE3Njc4NTMwMDl8MA&ixlib=rb-4.1.0&q=85&w=800',
-    technologies: ['React', 'Node.js', 'MongoDB', 'Stripe'],
+    technologies: ['React', 'Node.js', 'Tailwind'],
     icon: Globe,
     color: 'from-primary to-primary/50',
+    url: 'https://thuthichristianassembly.netlify.app/',
   },
   {
     id: 2,
@@ -27,24 +28,16 @@ const projects = [
   },
   {
     id: 3,
-    title: 'CRM System',
+    title: 'Presentation Software',
     category: 'Software',
-    description: 'Custom CRM solution with lead management, analytics dashboard, and automated workflows.',
+    description: 'A powerful church presentation software for displaying song lyrics, Bible verses, and multimedia content during worship services.',
     image: 'https://images.unsplash.com/photo-1568952433726-3896e3881c65?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHw0fHxhYnN0cmFjdCUyMHRlY2hub2xvZ3l8ZW58MHx8fGJsYWNrfDE3Njc4NTMwMDV8MA&ixlib=rb-4.1.0&q=85&w=800',
-    technologies: ['Python', 'Django', 'PostgreSQL', 'Docker'],
+    technologies: ['Electron', 'React', 'SQLite'],
     icon: Server,
     color: 'from-accent to-accent/50',
+    url: 'https://drive.google.com/drive/folders/112EpRXfDObD8_eM-3Y3fRYBdY_lMPkf4?usp=sharing',
   },
-  {
-    id: 4,
-    title: 'Restaurant Website',
-    category: 'Website',
-    description: 'Modern restaurant website with online ordering, table reservations, and menu management.',
-    image: 'https://images.unsplash.com/photo-1510906594845-bc082582c8cc?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMHRlY2hub2xvZ3l8ZW58MHx8fGJsYWNrfDE3Njc4NTMwMDV8MA&ixlib=rb-4.1.0&q=85&w=800',
-    technologies: ['Next.js', 'Tailwind', 'Supabase'],
-    icon: Globe,
-    color: 'from-pink to-pink/50',
-  },
+
 ];
 
 const categories = ['All', 'Website', 'Mobile App', 'Software'];
@@ -87,7 +80,7 @@ export const PortfolioSection = () => {
             <span className="text-gradient-primary">Featured Work</span>
           </h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            Explore some of our recent projects that showcase our expertise in 
+            Explore some of our recent projects that showcase our expertise in
             web development, mobile apps, and software solutions.
           </p>
         </motion.div>
@@ -103,11 +96,10 @@ export const PortfolioSection = () => {
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                activeCategory === category
-                  ? 'bg-gradient-to-r from-primary via-secondary to-pink text-primary-foreground'
-                  : 'bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted'
-              }`}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${activeCategory === category
+                ? 'bg-gradient-to-r from-primary via-secondary to-pink text-primary-foreground'
+                : 'bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted'
+                }`}
             >
               {category}
             </button>
@@ -117,7 +109,7 @@ export const PortfolioSection = () => {
         {/* Projects Grid */}
         <motion.div
           layout
-          className="grid md:grid-cols-2 gap-8"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, index) => (
@@ -138,30 +130,30 @@ export const PortfolioSection = () => {
                     alt={project.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/20" />
                 </div>
 
                 {/* Content */}
-                <div className="absolute bottom-0 left-0 right-0 p-6">
+                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-background/95 via-background/70 to-transparent">
                   <div className="flex items-center gap-2 mb-2">
                     <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${project.color} flex items-center justify-center`}>
                       <project.icon className="w-4 h-4 text-primary-foreground" />
                     </div>
-                    <span className="text-xs text-muted-foreground">{project.category}</span>
+                    <span className="text-xs text-muted-foreground font-medium">{project.category}</span>
                   </div>
-                  <h3 className="text-xl font-display font-bold text-foreground mb-2">
+                  <h3 className="text-xl font-display font-bold text-foreground mb-2 drop-shadow-lg">
                     {project.title}
                   </h3>
                   <p className="text-sm text-muted-foreground line-clamp-2">
                     {project.description}
                   </p>
-                  
+
                   {/* Technologies */}
                   <div className="mt-4 flex flex-wrap gap-2">
                     {project.technologies.slice(0, 3).map((tech) => (
                       <span
                         key={tech}
-                        className="px-2 py-1 text-xs rounded-full bg-muted/50 text-muted-foreground"
+                        className="px-2 py-1 text-xs rounded-full bg-muted/80 text-foreground backdrop-blur-sm"
                       >
                         {tech}
                       </span>
@@ -248,10 +240,19 @@ export const PortfolioSection = () => {
                   </div>
                 </div>
 
-                <Button variant="glow" className="w-full">
-                  <ExternalLink className="w-4 h-4 mr-2" />
-                  View Project
-                </Button>
+                {selectedProject.url ? (
+                  <a href={selectedProject.url} target="_blank" rel="noopener noreferrer" className="block">
+                    <Button variant="glow" className="w-full">
+                      <ExternalLink className="w-4 h-4 mr-2" />
+                      View Project
+                    </Button>
+                  </a>
+                ) : (
+                  <Button variant="glow" className="w-full" disabled>
+                    <ExternalLink className="w-4 h-4 mr-2" />
+                    Coming Soon
+                  </Button>
+                )}
               </div>
             </motion.div>
           </motion.div>
