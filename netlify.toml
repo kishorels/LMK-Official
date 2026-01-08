@@ -9,6 +9,6 @@
   to = "/index.html"
   status = 200
 
-# Node version
+# Node version (react-router-dom v7 requires Node 20+)
 [build.environment]
-  NODE_VERSION = "18"
+  NODE_VERSION = "20"
