@@ -199,13 +199,22 @@ export const SoftwareSection = () => {
             </motion.div>
 
             {/* Particle Effects */}
-            {[...Array(8)].map((_, i) => (
+            {[
+              { left: '25%', top: '30%', duration: 3.5 },
+              { left: '65%', top: '25%', duration: 4.2 },
+              { left: '40%', top: '70%', duration: 3.8 },
+              { left: '75%', top: '55%', duration: 4.5 },
+              { left: '30%', top: '45%', duration: 3.2 },
+              { left: '55%', top: '80%', duration: 4.0 },
+              { left: '80%', top: '35%', duration: 3.6 },
+              { left: '45%', top: '60%', duration: 4.3 },
+            ].map((particle, i) => (
               <motion.div
                 key={i}
                 className="absolute w-1.5 h-1.5 rounded-full bg-accent"
                 style={{
-                  left: `${20 + Math.random() * 60}%`,
-                  top: `${20 + Math.random() * 60}%`,
+                  left: particle.left,
+                  top: particle.top,
                 }}
                 animate={isInView ? {
                   y: [-20, 20, -20],
@@ -213,7 +222,7 @@ export const SoftwareSection = () => {
                   opacity: [0.2, 0.8, 0.2],
                 } : {}}
                 transition={{
-                  duration: 3 + Math.random() * 2,
+                  duration: particle.duration,
                   repeat: Infinity,
                   delay: i * 0.2,
                 }}
