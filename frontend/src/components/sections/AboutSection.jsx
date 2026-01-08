@@ -4,9 +4,10 @@ import { User, Award, Briefcase, Heart, Target, Rocket } from 'lucide-react';
 import { Badge } from '../ui/badge';
 
 const stats = [
-  { value: '50+', label: 'Projects Completed', icon: Briefcase },
-  { value: '5+', label: 'Years Experience', icon: Award },
-  { value: '30+', label: 'Happy Clients', icon: Heart },
+ { value: '100%', label: 'Client-Focused Approach', icon: Heart },
+{ value: 'Modern', label: 'Creative Design Solutions', icon: Award },
+{ value: 'Fast', label: 'Quick Support & Delivery', icon: Briefcase },
+
 ];
 
 const values = [

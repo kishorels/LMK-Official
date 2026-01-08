@@ -8,9 +8,9 @@ import { Textarea } from '../ui/textarea';
 import { Card, CardContent } from '../ui/card';
 
 const contactInfo = [
-  { icon: Mail, label: 'Email', value: 'contact@lmktechnology.com', href: 'mailto:contact@lmktechnology.com', color: 'text-primary' },
-  { icon: Phone, label: 'Phone', value: '+91 98765 43210', href: 'tel:+919876543210', color: 'text-secondary' },
-  { icon: MapPin, label: 'Location', value: 'Bangalore, India', href: '#', color: 'text-pink' },
+  { icon: Mail, label: 'Email', value: 'kishorepa64@gmail.com', href: 'mailto:kishorepa64@gmail.com', color: 'text-primary' },
+  { icon: Phone, label: 'Phone', value: '+91 6374308218', href: 'tel:+916374308218', color: 'text-secondary' },
+  { icon: MapPin, label: 'Location', value: 'Nagercoil, India', href: '#', color: 'text-pink' },
 ];
 
 export const ContactSection = () => {
@@ -132,7 +132,7 @@ export const ContactSection = () => {
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Monday - Friday</span>
-                    <span className="text-foreground">9:00 AM - 6:00 PM</span>
+                    <span className="text-foreground">9:00 AM - 8:00 PM</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Saturday</span>
@@ -183,7 +183,7 @@ export const ContactSection = () => {
                           name="name"
                           value={formState.name}
                           onChange={handleChange}
-                          placeholder="John Doe"
+                          placeholder="your name"
                           required
                           className="bg-background/50"
                         />
@@ -197,7 +197,7 @@ export const ContactSection = () => {
                           name="email"
                           value={formState.email}
                           onChange={handleChange}
-                          placeholder="john@example.com"
+                          placeholder="yourmail@example.com"
                           required
                           className="bg-background/50"
                         />
