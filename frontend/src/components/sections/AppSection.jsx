@@ -12,7 +12,7 @@ const appFeatures = [
 export const AppSection = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: false, margin: '-20%' });
-  
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start end', 'end start'],
@@ -30,7 +30,7 @@ export const AppSection = () => {
     >
       {/* Background Gradient */}
       <div className="absolute inset-0 pointer-events-none">
-        <div 
+        <div
           className="absolute top-1/3 -right-32 w-96 h-96 rounded-full opacity-20"
           style={{ background: 'radial-gradient(circle, hsl(280 84% 60%) 0%, transparent 70%)', filter: 'blur(80px)' }}
         />
@@ -61,11 +61,11 @@ export const AppSection = () => {
                     <Battery className="w-4 h-3.5" />
                   </div>
                 </div>
-                
+
                 {/* Screen Content */}
-                <div className="bg-[#0f0f1a] rounded-2xl overflow-hidden aspect-[9/16]">
+                <div className="bg-[#121217] rounded-2xl overflow-hidden aspect-[9/16]">
                   {/* App Header */}
-                  <div className="bg-gradient-to-r from-secondary/20 to-pink/20 p-4">
+                  <div className="bg-gradient-to-r from-secondary/10 to-pink/10 p-4">
                     <motion.div
                       initial={{ opacity: 0, y: -10 }}
                       animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -73,35 +73,35 @@ export const AppSection = () => {
                       className="flex items-center gap-3"
                     >
                       <div className="w-10 h-10 rounded-full bg-gradient-to-br from-secondary to-pink flex items-center justify-center">
-                        <span className="text-primary-foreground font-bold">L</span>
+                        <span className="text-white font-bold">L</span>
                       </div>
                       <div>
-                        <p className="text-sm font-semibold text-foreground">LMK App</p>
-                        <p className="text-xs text-muted-foreground">Welcome back!</p>
+                        <p className="text-sm font-semibold text-white">LMK App</p>
+                        <p className="text-xs text-slate-400">Welcome back!</p>
                       </div>
                     </motion.div>
                   </div>
-                  
+
                   {/* App Content */}
                   <div className="p-4 space-y-4">
                     {/* Feature Cards */}
                     {[
-                      { title: 'Dashboard', desc: 'View your stats', color: 'from-primary to-primary/50' },
-                      { title: 'Projects', desc: '3 active projects', color: 'from-secondary to-secondary/50' },
-                      { title: 'Messages', desc: '5 new messages', color: 'from-pink to-pink/50' },
+                      { title: 'Dashboard', desc: 'View your stats', color: 'from-primary/20 to-primary/5' },
+                      { title: 'Projects', desc: '3 active projects', color: 'from-secondary/20 to-secondary/5' },
+                      { title: 'Messages', desc: '5 new messages', color: 'from-pink/20 to-pink/5' },
                     ].map((item, i) => (
                       <motion.div
                         key={item.title}
                         initial={{ opacity: 0, x: -20 }}
                         animate={isInView ? { opacity: 1, x: 0 } : {}}
                         transition={{ delay: 0.5 + i * 0.15 }}
-                        className={`p-3 rounded-xl bg-gradient-to-r ${item.color} bg-opacity-10 border border-border/30`}
+                        className={`p-3 rounded-xl bg-gradient-to-r ${item.color} border border-white/5`}
                       >
-                        <p className="text-sm font-medium text-foreground">{item.title}</p>
-                        <p className="text-xs text-muted-foreground mt-1">{item.desc}</p>
+                        <p className="text-sm font-medium text-white">{item.title}</p>
+                        <p className="text-xs text-slate-400 mt-1">{item.desc}</p>
                       </motion.div>
                     ))}
-                    
+
                     {/* Action Button */}
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
@@ -115,7 +115,7 @@ export const AppSection = () => {
                     </motion.div>
                   </div>
                 </div>
-                
+
                 {/* Home Indicator */}
                 <div className="flex justify-center py-2">
                   <div className="w-24 h-1 bg-foreground/30 rounded-full" />
@@ -134,7 +134,7 @@ export const AppSection = () => {
             >
               <Bell className="w-5 h-5 text-secondary" />
             </motion.div>
-            
+
             <motion.div
               className="absolute bottom-20 -right-4 w-12 h-12 rounded-xl bg-pink/20 border border-pink/30 flex items-center justify-center"
               animate={{ y: [0, 15, 0], rotate: [0, -10, 0] }}
@@ -163,17 +163,17 @@ export const AppSection = () => {
               <Smartphone className="w-3.5 h-3.5 mr-2" />
               App Development
             </Badge>
-            
+
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold leading-tight">
               <span className="text-foreground">Native </span>
               <span className="text-gradient-primary">Mobile Apps</span>
               <br />
               <span className="text-foreground">For Every Platform</span>
             </h2>
-            
+
             <p className="mt-6 text-muted-foreground text-base leading-relaxed">
-              From iOS to Android, we develop high-performance mobile applications 
-              that deliver seamless user experiences. Our apps are built with the 
+              From iOS to Android, we develop high-performance mobile applications
+              that deliver seamless user experiences. Our apps are built with the
               latest technologies ensuring speed, security, and scalability.
             </p>
 

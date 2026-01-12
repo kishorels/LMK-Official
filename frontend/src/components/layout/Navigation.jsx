@@ -90,9 +90,13 @@ export const Navigation = () => {
                   onClick={() => scrollToSection(item.href)}
                   className={cn(
                     'relative px-4 py-2 text-sm font-medium transition-colors',
-                    activeSection === item.href.substring(1)
-                      ? 'text-foreground'
-                      : 'text-muted-foreground hover:text-foreground'
+                    isScrolled
+                      ? activeSection === item.href.substring(1)
+                        ? 'text-foreground'
+                        : 'text-muted-foreground hover:text-foreground'
+                      : activeSection === item.href.substring(1)
+                        ? 'text-white'
+                        : 'text-white/70 hover:text-white'
                   )}
                   whileHover={{ y: -2 }}
                   whileTap={{ y: 0 }}

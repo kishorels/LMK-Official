@@ -15,7 +15,7 @@ export const WebsiteSection = () => {
   const sectionRef = useRef(null);
   const laptopRef = useRef(null);
   const isInView = useInView(sectionRef, { once: false, margin: '-20%' });
-  
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start end', 'end start'],
@@ -35,7 +35,7 @@ export const WebsiteSection = () => {
     >
       {/* Background Gradient */}
       <div className="absolute inset-0 pointer-events-none">
-        <div 
+        <div
           className="absolute top-1/4 -left-32 w-96 h-96 rounded-full opacity-20"
           style={{ background: 'radial-gradient(circle, hsl(217 91% 60%) 0%, transparent 70%)', filter: 'blur(80px)' }}
         />
@@ -53,17 +53,17 @@ export const WebsiteSection = () => {
               <Monitor className="w-3.5 h-3.5 mr-2" />
               Website Development
             </Badge>
-            
+
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold leading-tight">
               <span className="text-foreground">Stunning </span>
               <span className="text-gradient-primary">Websites</span>
               <br />
               <span className="text-foreground">That Convert</span>
             </h2>
-            
+
             <p className="mt-6 text-muted-foreground text-base leading-relaxed">
-              We create responsive, fast-loading websites that not only look beautiful 
-              but also drive results. From corporate websites to e-commerce platforms, 
+              We create responsive, fast-loading websites that not only look beautiful
+              but also drive results. From corporate websites to e-commerce platforms,
               we deliver digital experiences that captivate your audience.
             </p>
 
@@ -107,19 +107,18 @@ export const WebsiteSection = () => {
                   {/* Screen Content - Code Animation */}
                   <div className="absolute inset-2 bg-[#0d1117] rounded overflow-hidden">
                     {/* Code Lines */}
-                    <div className="p-4 font-mono text-xs space-y-2">
+                    <div className="p-4 font-mono text-[10px] sm:text-xs space-y-1.5 sm:space-y-2">
                       {[
-                        { indent: 0, color: 'text-pink', text: 'const' },
-                        { indent: 0, color: 'text-primary', text: 'LMKWebsite = () => {' },
-                        { indent: 2, color: 'text-muted-foreground', text: '// Building amazing experiences' },
-                        { indent: 2, color: 'text-secondary', text: 'return (' },
-                        { indent: 4, color: 'text-accent', text: '<div className="awesome">' },
-                        { indent: 6, color: 'text-foreground', text: '<Hero />' },
-                        { indent: 6, color: 'text-foreground', text: '<Features />' },
-                        { indent: 6, color: 'text-foreground', text: '<Contact />' },
-                        { indent: 4, color: 'text-accent', text: '</div>' },
-                        { indent: 2, color: 'text-secondary', text: ');' },
-                        { indent: 0, color: 'text-primary', text: '};' },
+                        { indent: 0, color: 'text-[#ff79c6]', text: 'const' }, // Pink
+                        { indent: 0, color: 'text-[#8be9fd]', text: 'LMK_Success = () => {' }, // Cyan
+                        { indent: 2, color: 'text-slate-400', text: '// Crafting digital excellence' },
+                        { indent: 2, color: 'text-[#bd93f9]', text: 'return (' }, // Purple
+                        { indent: 4, color: 'text-[#f1fa8c]', text: '<Website' }, // Yellow
+                        { indent: 6, color: 'text-white', text: 'mode="premium"' },
+                        { indent: 6, color: 'text-white', text: 'speed="fast"' },
+                        { indent: 4, color: 'text-[#f1fa8c]', text: '/>' },
+                        { indent: 2, color: 'text-[#bd93f9]', text: ');' },
+                        { indent: 0, color: 'text-[#8be9fd]', text: '};' },
                       ].map((line, i) => (
                         <motion.div
                           key={i}
@@ -140,18 +139,18 @@ export const WebsiteSection = () => {
                       />
                     </div>
                   </div>
-                  
+
                   {/* Screen Reflection */}
                   <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
                 </div>
 
                 {/* Laptop Base */}
                 <div className="laptop-base h-4 mx-4">
-                  <div className="mx-auto w-16 h-1.5 bg-[#4a4a6a] rounded-b-lg mt-1" />
+                  <div className="mx-auto w-16 h-1.5 bg-border/40 rounded-b-lg mt-1" />
                 </div>
-                
+
                 {/* Keyboard Hint */}
-                <div className="h-2 bg-gradient-to-b from-[#3d3d5c] to-[#2d2d44] mx-8 rounded-b-lg" />
+                <div className="h-2 bg-gradient-to-b from-border to-muted mx-8 rounded-b-lg" />
               </motion.div>
 
               {/* Floating Elements */}
@@ -162,7 +161,7 @@ export const WebsiteSection = () => {
               >
                 <Code2 className="w-8 h-8 text-primary" />
               </motion.div>
-              
+
               <motion.div
                 className="absolute -bottom-4 -left-8 w-14 h-14 rounded-xl bg-secondary/20 border border-secondary/30 flex items-center justify-center"
                 animate={{ y: [0, 10, 0], rotate: [0, -5, 0] }}

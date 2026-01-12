@@ -18,9 +18,9 @@ const projects = [
   },
   {
     id: 2,
-    title: 'Fitness Tracker App',
+    title: 'AquaRescue App',
     category: 'Mobile App',
-    description: 'A comprehensive fitness tracking app with workout plans, progress monitoring, and social features.',
+    description: 'quaRescue is a fast and reliable flood emergency app that lets users send SOS alerts, share live location, and receive critical safety updates when every second matters.',
     image: 'https://images.unsplash.com/photo-1633250391894-397930e3f5f2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwxfHxtb2JpbGUlMjBhcHAlMjBkZXZlbG9wbWVudHxlbnwwfHx8fDE3Njc4NTMwMTR8MA&ixlib=rb-4.1.0&q=85&w=800',
     technologies: ['React Native', 'Firebase', 'Redux'],
     icon: Smartphone,

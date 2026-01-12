@@ -1,195 +1,243 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { ChevronDown, Sparkles, Code2, Smartphone, Server } from 'lucide-react';
-import { Button } from '../ui/button';
-import { Badge } from '../ui/badge';
+import React, { useState, useEffect } from 'react';
+import { Sparkles, Code2, Smartphone, Server, ArrowRight } from 'lucide-react';
 
 const LOGO_URL = '/lmk-logo.png';
 
 export const HeroSection = () => {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end start'],
-  });
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [scrollY, setScrollY] = useState(0);
 
-  const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({
+        x: (e.clientX / window.innerWidth - 0.5) * 20,
+        y: (e.clientY / window.innerHeight - 0.5) * 20
+      });
+    };
+
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const scrollToServices = () => {
     document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const opacity = Math.max(0, 1 - scrollY / 500);
+  const translateY = scrollY * 0.4;
+
   return (
     <section
-      ref={containerRef}
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      style={{ backgroundImage: 'url(/bg.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}
     >
-      {/* Animated Background Elements - Simplified on mobile for performance */}
-      <div className="absolute inset-0">
-        {/* Grid Pattern */}
-        <div className="absolute inset-0 grid-bg opacity-20 sm:opacity-30" />
+      {/* Dark Overlay to dim background */}
+      <div
+        className="absolute inset-0 z-0"
+        style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
+      />
 
-        {/* Gradient Orbs - Smaller on mobile */}
+      {/* Sophisticated Background Grid */}
+      <div className="absolute inset-0">
         <div
-          className="absolute top-1/4 left-1/4 w-48 sm:w-96 h-48 sm:h-96 rounded-full"
+          className="absolute inset-0 opacity-30"
           style={{
-            background: 'radial-gradient(circle, hsl(217 91% 60% / 0.15) 0%, transparent 70%)',
-            filter: 'blur(40px)',
-            willChange: 'transform',
+            backgroundImage: `
+              linear-gradient(to right, rgb(148 163 184 / 0.15) 1px, transparent 1px),
+              linear-gradient(to bottom, rgb(148 163 184 / 0.15) 1px, transparent 1px)
+            `,
+            backgroundSize: '80px 80px',
+          }}
+        />
+
+        {/* Premium Gradient Overlays - Hidden on mobile for performance */}
+        <div
+          className="hidden md:block absolute top-0 left-1/4 w-96 h-96 rounded-full opacity-20 blur-3xl"
+          style={{
+            background: 'radial-gradient(circle, rgb(59 130 246 / 0.3), transparent 70%)',
+            transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)`,
+            transition: 'transform 0.3s ease-out'
           }}
         />
         <div
-          className="absolute bottom-1/4 right-1/4 w-40 sm:w-80 h-40 sm:h-80 rounded-full"
+          className="hidden md:block absolute bottom-0 right-1/4 w-96 h-96 rounded-full opacity-15 blur-3xl"
           style={{
-            background: 'radial-gradient(circle, hsl(280 84% 60% / 0.15) 0%, transparent 70%)',
-            filter: 'blur(40px)',
-            willChange: 'transform',
+            background: 'radial-gradient(circle, rgb(139 92 246 / 0.3), transparent 70%)',
+            transform: `translate(${-mousePosition.x}px, ${-mousePosition.y}px)`,
+            transition: 'transform 0.3s ease-out'
           }}
         />
+
+        {/* Accent Glow */}
         <div
-          className="absolute top-1/2 right-1/3 w-32 sm:w-64 h-32 sm:h-64 rounded-full hidden sm:block"
+          className="absolute top-1/2 left-1/2 w-[300px] md:w-[600px] h-[300px] md:h-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-10 blur-3xl"
           style={{
-            background: 'radial-gradient(circle, hsl(35 92% 55% / 0.1) 0%, transparent 70%)',
-            filter: 'blur(50px)',
+            background: 'radial-gradient(circle, rgb(96 165 250), transparent 60%)',
           }}
         />
       </div>
 
       {/* Main Content */}
-      <motion.div
-        style={{ y, opacity, scale }}
-        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 pb-8 sm:pb-16"
+      <div
+        style={{
+          opacity,
+          transform: `translateY(${translateY}px)`
+        }}
+        className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex items-center justify-center"
       >
-        <div className="text-center">
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <Badge variant="gradient" className="mb-4 sm:mb-6 px-3 sm:px-4 py-1 sm:py-1.5">
-              <Sparkles className="w-3 sm:w-3.5 h-3 sm:h-3.5 mr-1.5 sm:mr-2" />
-              Crafting Digital Excellence
-            </Badge>
-          </motion.div>
+        <div className="w-full max-w-5xl mx-auto flex flex-col items-center text-center py-8 sm:py-12">
 
-          {/* Logo Animation - Reduced animation on mobile */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-4 sm:mb-8"
+          {/* Compact Premium Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 mb-6 sm:mb-8">
+            <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+            <span className="text-xs font-semibold text-white">Crafting Digital Excellence</span>
+            <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+          </div>
+
+          {/* Compact Logo */}
+          <div
+            className="w-full flex justify-center mb-6 sm:mb-8 opacity-0 animate-fadeIn"
+            style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}
           >
             <img
               src={LOGO_URL}
               alt="LMK Technology Logo"
-              className="mx-auto h-24 sm:h-40 lg:h-48 w-auto object-contain"
-              style={{
-                filter: 'drop-shadow(0 0 20px hsl(217 91% 60% / 0.5))',
-              }}
+              className="h-20 sm:h-28 md:h-32 lg:h-36 w-auto object-contain drop-shadow-xl"
             />
-          </motion.div>
+          </div>
 
-          {/* Headline */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-bold leading-tight"
-          >
-            <span className="text-foreground">Building the </span>
-            <span className="text-gradient-primary">Future</span>
-            <br />
-            <span className="text-foreground">of Digital Solutions</span>
-          </motion.h1>
+          {/* Refined Headline - Smaller */}
+          <div className="mb-4 sm:mb-6 opacity-0 animate-fadeIn" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
+              <span className="block text-white">Building the </span>
+              <span
+                className="block bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent my-1"
+                style={{
+                  backgroundSize: '200% auto',
+                  animation: 'gradient 3s linear infinite'
+                }}
+              >
+                Future
+              </span>
+              <span className="block text-white">of Digital Solutions</span>
+            </h1>
+          </div>
 
-          {/* Subheadline */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="mt-4 sm:mt-6 text-sm sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed px-2"
-          >
-            We specialize in Website, App & Software Development.
-            Transform your vision into reality with cutting-edge technology
-            and exceptional design by Kishore L M.
-          </motion.p>
+          {/* Compact Subheadline */}
+          <div className="mb-6 sm:mb-8 opacity-0 animate-fadeIn" style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}>
+            <p className="text-sm sm:text-base md:text-lg text-slate-200 max-w-2xl mx-auto leading-relaxed">
+              We specialize in <span className="font-semibold text-white">Website</span>, <span className="font-semibold text-white">App</span> & <span className="font-semibold text-white">Software Development</span>.
+            </p>
+            <p className="text-xs sm:text-sm text-slate-300 mt-2 max-w-xl mx-auto">
+              Transform your vision into reality with cutting-edge technology and exceptional design.
+            </p>
+          </div>
 
-          {/* Service Icons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="mt-6 sm:mt-10 flex flex-wrap justify-center gap-2 sm:gap-6"
+          {/* Compact Service Pills */}
+          <div
+            className="w-full flex flex-wrap justify-center gap-2 sm:gap-3 mb-6 sm:mb-8 max-w-3xl mx-auto opacity-0 animate-fadeIn"
+            style={{ animationDelay: '0.8s', animationFillMode: 'forwards' }}
           >
             {[
-              { icon: Code2, label: 'Web Development', color: 'text-primary' },
-              { icon: Smartphone, label: 'App Development', color: 'text-secondary' },
-              { icon: Server, label: 'Software Solutions', color: 'text-accent' },
-            ].map((service, index) => (
-              <motion.div
+              { icon: Code2, label: 'Web Development', gradient: 'from-blue-500 to-cyan-500' },
+              { icon: Smartphone, label: 'App Development', gradient: 'from-violet-500 to-purple-500' },
+              { icon: Server, label: 'Software Solutions', gradient: 'from-cyan-500 to-blue-500' },
+            ].map((service) => (
+              <div
                 key={service.label}
-                className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-muted/50 border border-border/50"
-                whileHover={{ scale: 1.05, borderColor: 'hsl(var(--primary))' }}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.8 + index * 0.1 }}
+                className="group relative flex items-center gap-2 px-4 py-2 rounded-full bg-white/15 backdrop-blur-md border border-white/30 hover:border-white/50 hover:bg-white/25 hover:shadow-md hover:scale-105 transition-all duration-300 cursor-pointer"
               >
-                <service.icon className={`w-4 sm:w-5 h-4 sm:h-5 ${service.color}`} />
-                <span className="text-xs sm:text-sm font-medium text-foreground">
+                <div className={`p-1.5 rounded-lg bg-gradient-to-br ${service.gradient} shadow-sm`}>
+                  <service.icon className="w-3.5 h-3.5 text-white" />
+                </div>
+                <span className="text-xs sm:text-sm font-semibold text-white group-hover:text-white transition-colors whitespace-nowrap">
                   {service.label}
                 </span>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
 
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1 }}
-            className="mt-6 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
+          {/* Compact CTA Buttons */}
+          <div
+            className="w-full flex flex-col sm:flex-row items-center justify-center gap-3 max-w-lg mx-auto mb-8 sm:mb-10 opacity-0 animate-fadeIn"
+            style={{ animationDelay: '1s', animationFillMode: 'forwards' }}
           >
-            <Button
-              variant="glow"
-              size="lg"
+            <button
               onClick={scrollToServices}
-              className="w-full sm:w-auto"
+              className="group relative w-full sm:w-auto px-8 py-3 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold text-sm sm:text-base overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/30 hover:scale-105 active:scale-100"
             >
-              Explore Services
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
-              className="w-full sm:w-auto"
-            >
-              View Portfolio
-            </Button>
-          </motion.div>
-        </div>
-      </motion.div>
+              <span className="relative z-10 flex items-center justify-center gap-2">
+                Explore Services
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </button>
 
-      {/* Scroll Indicator - Hidden on very small screens */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 z-10 hidden sm:block"
-      >
-        <motion.button
-          onClick={scrollToServices}
-          className="flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <span className="text-xs uppercase tracking-wider">Scroll to explore</span>
-          <ChevronDown className="w-5 h-5" />
-        </motion.button>
-      </motion.div>
+            <button
+              onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
+              className="group w-full sm:w-auto px-8 py-3 rounded-full bg-white/15 backdrop-blur-md border-2 border-white/40 text-white font-bold text-sm sm:text-base hover:bg-white/25 hover:border-white/60 hover:shadow-lg transition-all duration-300 hover:scale-105 active:scale-100"
+            >
+              <span className="flex items-center justify-center gap-2">
+                View Portfolio
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </button>
+          </div>
+
+          {/* Minimal Scroll Indicator */}
+          <div
+            className="opacity-0 animate-fadeIn"
+            style={{ animationDelay: '1.2s', animationFillMode: 'forwards' }}
+          >
+            <button
+              onClick={scrollToServices}
+              className="flex flex-col items-center gap-1.5 text-white/70 hover:text-white transition-colors group"
+            >
+              <span className="text-[10px] uppercase tracking-widest font-semibold">Scroll</span>
+              <div className="w-5 h-8 rounded-full border-2 border-white/40 flex items-start justify-center p-1.5 group-hover:border-white/60 transition-colors bg-white/10">
+                <div className="w-1 h-2 rounded-full bg-white/70 animate-bounce" />
+              </div>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <style jsx>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes gradient {
+          0%, 100% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+        }
+
+        .animate-fadeIn {
+          animation: fadeIn 0.8s ease-out;
+        }
+      `}</style>
     </section>
   );
 };
