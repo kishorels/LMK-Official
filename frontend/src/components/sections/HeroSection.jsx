@@ -1,243 +1,281 @@
-import React, { useState, useEffect } from 'react';
-import { Sparkles, Code2, Smartphone, Server, ArrowRight } from 'lucide-react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Sparkles, Code2, Smartphone, Server } from 'lucide-react';
 
-const LOGO_URL = '/lmk-logo.png';
-
-export const HeroSection = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [scrollY, setScrollY] = useState(0);
+// Simulating tsparticles - in your actual app, import from @tsparticles/react
+const Particles = ({ options }) => {
+  const canvasRef = React.useRef(null);
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
-      setMousePosition({
-        x: (e.clientX / window.innerWidth - 0.5) * 20,
-        y: (e.clientY / window.innerHeight - 0.5) * 20
-      });
+    if (!canvasRef.current) return;
+
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles = [];
+    const particleCount = options.particles.number.value || 50;
+    const mouse = { x: null, y: null, radius: 200 };
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * (options.particles.move.speed || 1);
+        this.vy = (Math.random() - 0.5) * (options.particles.move.speed || 1);
+        this.size = Math.random() * 2 + 1;
+        const colors = ['#14b8a6', '#6366f1', '#a855f7', '#22d3ee']; // Teal, Indigo, Purple, Cyan
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+      }
+
+      update() {
+        // Mouse repulse effect
+        if (mouse.x && mouse.y) {
+          const dx = this.x - mouse.x;
+          const dy = this.y - mouse.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < mouse.radius) {
+            const force = (mouse.radius - distance) / mouse.radius;
+            const angle = Math.atan2(dy, dx);
+            this.x += Math.cos(angle) * force * 10;
+            this.y += Math.sin(angle) * force * 10;
+          }
+        }
+
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+      }
+
+      draw() {
+        ctx.fillStyle = this.color;
+        ctx.globalAlpha = options.particles.opacity.value;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+
+    const connectParticles = () => {
+      const linkDistance = options.particles.links.distance || 150;
+      const linkOpacity = options.particles.links.opacity;
+      const linkDistSq = linkDistance * linkDistance;
+
+      for (let i = 0; i < particles.length; i++) {
+        // Use the particle's own color for its outgoing links
+        ctx.strokeStyle = particles[i].color;
+        ctx.lineWidth = options.particles.links.width;
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distanceSq = dx * dx + dy * dy;
+
+          if (distanceSq < linkDistSq) {
+            const distance = Math.sqrt(distanceSq);
+            ctx.globalAlpha = linkOpacity * (1 - distance / linkDistance);
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
     };
 
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+      });
+
+      if (options.particles.links.enable) {
+        connectParticles();
+      }
+
+      requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    const handleMouseMove = (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    };
+
+    const handleMouseLeave = () => {
+      mouse.x = null;
+      mouse.y = null;
+    };
+
+    const handleClick = (e) => {
+      for (let i = 0; i < 4; i++) {
+        particles.push(new Particle());
+        particles[particles.length - 1].x = e.clientX;
+        particles[particles.length - 1].y = e.clientY;
+      }
+    };
+
+    const handleResize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('mouseleave', handleMouseLeave);
+    window.addEventListener('click', handleClick);
+    window.addEventListener('resize', handleResize);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('click', handleClick);
+      window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [options]);
 
-  const scrollToServices = () => {
-    document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
-  };
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />;
+};
 
-  const opacity = Math.max(0, 1 - scrollY / 500);
-  const translateY = scrollY * 0.4;
+export default function HeroSection() {
+  const services = [
+    { icon: Code2, label: 'Web Development', desc: 'Modern & Responsive', gradient: 'from-teal-500 to-cyan-500' },
+    { icon: Smartphone, label: 'App Development', desc: 'iOS & Android', gradient: 'from-indigo-500 to-purple-500' },
+    { icon: Server, label: 'Software Solutions', desc: 'Custom Built', gradient: 'from-cyan-500 to-blue-500' },
+  ];
 
   return (
-    <section
-      id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{ backgroundImage: 'url(/bg.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}
-    >
-      {/* Dark Overlay to dim background */}
-      <div
-        className="absolute inset-0 z-0"
-        style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
-      />
+    <section id="home" className="relative min-h-screen overflow-hidden bg-[#020617] bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-teal-900/20 via-slate-950 to-slate-950">
+      {/* Background Effects */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] rounded-full bg-teal-500/10 blur-[80px] animate-pulse" style={{ animationDuration: '8s' }} />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-indigo-500/10 blur-[80px] animate-pulse" style={{ animationDuration: '10s' }} />
+        <div className="absolute top-[20%] left-[30%] w-[40%] h-[40%] rounded-full bg-purple-500/5 blur-[60px]" />
 
-      {/* Sophisticated Background Grid */}
-      <div className="absolute inset-0">
-        <div
-          className="absolute inset-0 opacity-30"
-          style={{
-            backgroundImage: `
-              linear-gradient(to right, rgb(148 163 184 / 0.15) 1px, transparent 1px),
-              linear-gradient(to bottom, rgb(148 163 184 / 0.15) 1px, transparent 1px)
-            `,
-            backgroundSize: '80px 80px',
-          }}
-        />
-
-        {/* Premium Gradient Overlays - Hidden on mobile for performance */}
-        <div
-          className="hidden md:block absolute top-0 left-1/4 w-96 h-96 rounded-full opacity-20 blur-3xl"
-          style={{
-            background: 'radial-gradient(circle, rgb(59 130 246 / 0.3), transparent 70%)',
-            transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)`,
-            transition: 'transform 0.3s ease-out'
-          }}
-        />
-        <div
-          className="hidden md:block absolute bottom-0 right-1/4 w-96 h-96 rounded-full opacity-15 blur-3xl"
-          style={{
-            background: 'radial-gradient(circle, rgb(139 92 246 / 0.3), transparent 70%)',
-            transform: `translate(${-mousePosition.x}px, ${-mousePosition.y}px)`,
-            transition: 'transform 0.3s ease-out'
-          }}
-        />
-
-        {/* Accent Glow */}
-        <div
-          className="absolute top-1/2 left-1/2 w-[300px] md:w-[600px] h-[300px] md:h-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-10 blur-3xl"
-          style={{
-            background: 'radial-gradient(circle, rgb(96 165 250), transparent 60%)',
+        {/* Particles */}
+        <Particles
+          options={{
+            particles: {
+              links: {
+                distance: 120,
+                enable: true,
+                opacity: 0.3,
+                width: 1,
+              },
+              move: {
+                enable: true,
+                speed: 3,
+              },
+              number: {
+                value: typeof window !== 'undefined' && window.innerWidth < 768 ? 50 : 120,
+              },
+              opacity: {
+                value: 0.4,
+              },
+            },
           }}
         />
       </div>
 
-      {/* Main Content */}
-      <div
-        style={{
-          opacity,
-          transform: `translateY(${translateY}px)`
-        }}
-        className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex items-center justify-center"
+      {/* Content */}
+      <div className="relative z-10 w-full min-h-screen px-4 sm:px-6 lg:px-12 py-20 flex flex-col justify-between"
       >
-        <div className="w-full max-w-5xl mx-auto flex flex-col items-center text-center py-8 sm:py-12">
-
-          {/* Compact Premium Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 shadow-sm hover:shadow-md transition-all duration-300 mb-6 sm:mb-8">
-            <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-            <span className="text-xs font-semibold text-white">Crafting Digital Excellence</span>
-            <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+        {/* Status Badge */}
+        <div className="flex flex-col md:flex-row items-center justify-end gap-6 pt-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl hover:bg-white/10 hover:scale-105 transition-all duration-300 opacity-0 animate-fadeIn" style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}>
+            <Sparkles className="w-4 h-4 text-teal-400" />
+            <span className="text-sm font-semibold text-slate-200">Freelance Developer</span>
+            <div className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
           </div>
+        </div>
 
-          {/* Compact Logo */}
-          <div
-            className="w-full flex justify-center mb-6 sm:mb-8 opacity-0 animate-fadeIn"
-            style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}
-          >
-            <img
-              src={LOGO_URL}
-              alt="LMK Technology Logo"
-              className="h-20 sm:h-28 md:h-32 lg:h-36 w-auto object-contain drop-shadow-xl"
-            />
-          </div>
-
-          {/* Refined Headline - Smaller */}
-          <div className="mb-4 sm:mb-6 opacity-0 animate-fadeIn" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
-              <span className="block text-white">Building the </span>
-              <span
-                className="block bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent my-1"
-                style={{
-                  backgroundSize: '200% auto',
-                  animation: 'gradient 3s linear infinite'
-                }}
-              >
-                Future
-              </span>
-              <span className="block text-white">of Digital Solutions</span>
-            </h1>
-          </div>
-
-          {/* Compact Subheadline */}
-          <div className="mb-6 sm:mb-8 opacity-0 animate-fadeIn" style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}>
-            <p className="text-sm sm:text-base md:text-lg text-slate-200 max-w-2xl mx-auto leading-relaxed">
-              We specialize in <span className="font-semibold text-white">Website</span>, <span className="font-semibold text-white">App</span> & <span className="font-semibold text-white">Software Development</span>.
-            </p>
-            <p className="text-xs sm:text-sm text-slate-300 mt-2 max-w-xl mx-auto">
-              Transform your vision into reality with cutting-edge technology and exceptional design.
-            </p>
-          </div>
-
-          {/* Compact Service Pills */}
-          <div
-            className="w-full flex flex-wrap justify-center gap-2 sm:gap-3 mb-6 sm:mb-8 max-w-3xl mx-auto opacity-0 animate-fadeIn"
-            style={{ animationDelay: '0.8s', animationFillMode: 'forwards' }}
-          >
-            {[
-              { icon: Code2, label: 'Web Development', gradient: 'from-blue-500 to-cyan-500' },
-              { icon: Smartphone, label: 'App Development', gradient: 'from-violet-500 to-purple-500' },
-              { icon: Server, label: 'Software Solutions', gradient: 'from-cyan-500 to-blue-500' },
-            ].map((service) => (
-              <div
-                key={service.label}
-                className="group relative flex items-center gap-2 px-4 py-2 rounded-full bg-white/15 backdrop-blur-md border border-white/30 hover:border-white/50 hover:bg-white/25 hover:shadow-md hover:scale-105 transition-all duration-300 cursor-pointer"
-              >
-                <div className={`p-1.5 rounded-lg bg-gradient-to-br ${service.gradient} shadow-sm`}>
-                  <service.icon className="w-3.5 h-3.5 text-white" />
-                </div>
-                <span className="text-xs sm:text-sm font-semibold text-white group-hover:text-white transition-colors whitespace-nowrap">
-                  {service.label}
+        {/* Main Content */}
+        <div className="flex-1 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 py-8">
+          {/* Left Column - Hero Text */}
+          <div className="flex-1 max-w-2xl text-center lg:text-left">
+            <div className="mb-6 opacity-0 animate-fadeIn" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight text-white mb-2">
+                Hi, I'm <br />
+                <span
+                  className="bg-gradient-to-r from-teal-400 via-indigo-400 to-violet-400 bg-clip-text text-transparent"
+                  style={{ backgroundSize: '200% auto', animation: 'gradient 4s linear infinite' }}
+                >
+                  Your Developer
                 </span>
-              </div>
-            ))}
+              </h1>
+            </div>
+
+            <div className="mb-8 opacity-0 animate-fadeIn" style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}>
+              <p className="text-base sm:text-lg md:text-xl text-slate-200 leading-relaxed">
+                I build <span className="font-semibold text-white">Websites</span>, <span className="font-semibold text-white">Apps</span> & <span className="font-semibold text-white">Software</span>.
+              </p>
+            </div>
+
+            <div className="mb-8 opacity-0 animate-fadeIn" style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}>
+              <button
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                className="group relative px-8 py-3.5 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold text-base transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(34,211,238,0.5)] active:scale-100 overflow-hidden"
+              >
+                <span className="relative z-10">Let's Work Together</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </button>
+            </div>
           </div>
 
-          {/* Compact CTA Buttons */}
-          <div
-            className="w-full flex flex-col sm:flex-row items-center justify-center gap-3 max-w-lg mx-auto mb-8 sm:mb-10 opacity-0 animate-fadeIn"
-            style={{ animationDelay: '1s', animationFillMode: 'forwards' }}
-          >
-            <button
-              onClick={scrollToServices}
-              className="group relative w-full sm:w-auto px-8 py-3 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold text-sm sm:text-base overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/30 hover:scale-105 active:scale-100"
-            >
-              <span className="relative z-10 flex items-center justify-center gap-2">
-                Explore Services
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </button>
+          {/* Right Column - Service Cards */}
+          <div className="flex-1 max-w-md w-full opacity-0 animate-fadeIn" style={{ animationDelay: '0.8s', animationFillMode: 'forwards' }}>
+            <div className="grid gap-4">
+              {services.map((service, index) => (
+                <div
+                  key={service.label}
+                  className="group relative flex items-center gap-4 p-4 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-white/20 hover:scale-[1.03] transition-all duration-300 cursor-pointer overflow-hidden"
+                  style={{ animationDelay: `${0.9 + index * 0.1}s` }}
+                >
+                  {/* Hover gradient overlay */}
+                  <div className={`absolute inset-0 bg-gradient-to-r ${service.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
 
-            <button
-              onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
-              className="group w-full sm:w-auto px-8 py-3 rounded-full bg-white/15 backdrop-blur-md border-2 border-white/40 text-white font-bold text-sm sm:text-base hover:bg-white/25 hover:border-white/60 hover:shadow-lg transition-all duration-300 hover:scale-105 active:scale-100"
-            >
-              <span className="flex items-center justify-center gap-2">
-                View Portfolio
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </span>
-            </button>
+                  {/* Icon */}
+                  <div className={`relative p-3 rounded-xl bg-gradient-to-br ${service.gradient} shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}>
+                    <service.icon className="w-6 h-6 text-white" />
+                  </div>
+
+                  {/* Text */}
+                  <div className="flex-1 relative z-10">
+                    <h3 className="text-white font-bold group-hover:text-teal-300 transition-colors duration-300">{service.label}</h3>
+                    <p className="text-slate-400 text-sm group-hover:text-slate-300 transition-colors duration-300">{service.desc}</p>
+                  </div>
+
+                  {/* Glow effect on hover */}
+                  <div className="absolute -inset-1 bg-gradient-to-r from-teal-500/20 to-indigo-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
+                </div>
+              ))}
+            </div>
           </div>
-
-          {/* Minimal Scroll Indicator */}
-          <div
-            className="opacity-0 animate-fadeIn"
-            style={{ animationDelay: '1.2s', animationFillMode: 'forwards' }}
-          >
-            <button
-              onClick={scrollToServices}
-              className="flex flex-col items-center gap-1.5 text-white/70 hover:text-white transition-colors group"
-            >
-              <span className="text-[10px] uppercase tracking-widest font-semibold">Scroll</span>
-              <div className="w-5 h-8 rounded-full border-2 border-white/40 flex items-start justify-center p-1.5 group-hover:border-white/60 transition-colors bg-white/10">
-                <div className="w-1 h-2 rounded-full bg-white/70 animate-bounce" />
-              </div>
-            </button>
-          </div>
-
         </div>
       </div>
 
-      <style jsx>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+      <style>{`
+        @keyframes fadeIn { 
+          from { opacity: 0; transform: translateY(20px); } 
+          to { opacity: 1; transform: translateY(0); } 
         }
-
-        @keyframes gradient {
-          0%, 100% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
+        @keyframes gradient { 
+          0%, 100% { background-position: 0% 50%; } 
+          50% { background-position: 100% 50%; } 
         }
-
-        .animate-fadeIn {
-          animation: fadeIn 0.8s ease-out;
+        .animate-fadeIn { 
+          animation: fadeIn 0.8s ease-out; 
         }
       `}</style>
     </section>
   );
-};
+}

@@ -78,7 +78,7 @@ export const Navigation = () => {
               <img
                 src={LOGO_URL}
                 alt="LMK Technology"
-                className="h-12 w-auto object-contain"
+                className="h-20 w-auto object-contain"
               />
             </motion.a>
 
