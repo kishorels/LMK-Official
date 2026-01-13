@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Sparkles, Code2, Smartphone, Server } from 'lucide-react';
 
 // Simulating tsparticles - in your actual app, import from @tsparticles/react
-const Particles = ({ options }) => {
+const Particles = ({ id, init, options }) => {
   const canvasRef = React.useRef(null);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ const Particles = ({ options }) => {
 
     const particles = [];
     const particleCount = options.particles.number.value || 50;
-    const mouse = { x: null, y: null, radius: 200 };
+    const mouse = { x: null, y: null, radius: 150 };
 
     class Particle {
       constructor() {
@@ -147,6 +147,26 @@ const Particles = ({ options }) => {
 };
 
 export default function HeroSection() {
+  const [scrollY, setScrollY] = useState(0);
+
+  const particlesInit = useCallback(async (engine) => {
+    console.log('Particles initialized');
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const opacity = Math.max(0, 1 - scrollY / 500);
+  const translateY = scrollY * 0.4;
+
   const services = [
     { icon: Code2, label: 'Web Development', desc: 'Modern & Responsive', gradient: 'from-teal-500 to-cyan-500' },
     { icon: Smartphone, label: 'App Development', desc: 'iOS & Android', gradient: 'from-indigo-500 to-purple-500' },
@@ -154,40 +174,91 @@ export default function HeroSection() {
   ];
 
   return (
-    <section id="home" className="relative min-h-screen overflow-hidden bg-[#020617] bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-teal-900/20 via-slate-950 to-slate-950">
+    <section id="home" className="relative min-h-screen overflow-hidden bg-[#020617]">
       {/* Background Effects */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] rounded-full bg-teal-500/10 blur-[80px] animate-pulse" style={{ animationDuration: '8s' }} />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-indigo-500/10 blur-[80px] animate-pulse" style={{ animationDuration: '10s' }} />
-        <div className="absolute top-[20%] left-[30%] w-[40%] h-[40%] rounded-full bg-purple-500/5 blur-[60px]" />
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-teal-500/5 blur-[120px] animate-pulse" style={{ animationDuration: '8s' }} />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-500/5 blur-[120px] animate-pulse" style={{ animationDuration: '10s' }} />
 
         {/* Particles */}
         <Particles
+          id="tsparticles"
+          init={particlesInit}
           options={{
+            background: {
+              color: {
+                value: "transparent",
+              },
+            },
+            fpsLimit: 120,
+            interactivity: {
+              events: {
+                onClick: {
+                  enable: true,
+                  mode: "push",
+                },
+                onHover: {
+                  enable: true,
+                  mode: "repulse",
+                },
+                resize: true,
+              },
+              modes: {
+                push: {
+                  quantity: 4,
+                },
+                repulse: {
+                  distance: 200,
+                  duration: 0.4,
+                },
+              },
+            },
             particles: {
+              color: {
+                value: "#14b8a6",
+              },
               links: {
-                distance: 120,
+                color: "#14b8a6",
+                distance: 150,
                 enable: true,
                 opacity: 0.3,
                 width: 1,
               },
               move: {
+                direction: "none",
                 enable: true,
+                outModes: {
+                  default: "bounce",
+                },
+                random: false,
                 speed: 3,
+                straight: false,
               },
               number: {
-                value: typeof window !== 'undefined' && window.innerWidth < 768 ? 50 : 120,
+                density: {
+                  enable: true,
+                },
+                value: typeof window !== 'undefined' && window.innerWidth < 1024 ? 50 : 200,
               },
               opacity: {
                 value: 0.4,
               },
+              shape: {
+                type: "circle",
+              },
+              size: {
+                value: { min: 1, max: 3 },
+              },
             },
+            detectRetina: true,
           }}
         />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 w-full min-h-screen px-4 sm:px-6 lg:px-12 py-20 flex flex-col justify-between"
+      <div
+        style={{ opacity, transform: `translateY(${translateY}px)` }}
+        className="relative z-10 w-full min-h-screen px-4 sm:px-6 lg:px-12 py-20 flex flex-col justify-between"
       >
         {/* Status Badge */}
         <div className="flex flex-col md:flex-row items-center justify-end gap-6 pt-4">

@@ -139,7 +139,7 @@ export const PortfolioSection = () => {
                     <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${project.color} flex items-center justify-center`}>
                       <project.icon className="w-4 h-4 text-primary-foreground" />
                     </div>
-                    <span className="text-xs text-muted-foreground font-medium">{project.category}</span>
+                    <Badge variant="outline" className="text-xs">{project.category}</Badge>
                   </div>
                   <h3 className="text-xl font-display font-bold text-foreground mb-2 drop-shadow-lg">
                     {project.title}
@@ -218,7 +218,7 @@ export const PortfolioSection = () => {
                     <h3 className="text-2xl font-display font-bold text-foreground">
                       {selectedProject.title}
                     </h3>
-                    <span className="text-sm text-muted-foreground">{selectedProject.category}</span>
+                    <Badge variant="outline" className="text-sm">{selectedProject.category}</Badge>
                   </div>
                 </div>
 
