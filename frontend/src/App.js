@@ -1,20 +1,17 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'sonner';
 
 // Layout Components
 import { Navigation } from './components/layout/Navigation';
 import { Footer } from './components/layout/Footer';
 
-// Section Components
-import HeroSection from './components/sections/HeroSection';
-import { ServicesSection } from './components/sections/ServicesSection';
-import { WebsiteSection } from './components/sections/WebsiteSection';
-import { AppSection } from './components/sections/AppSection';
-import { SoftwareSection } from './components/sections/SoftwareSection';
-import { AboutSection } from './components/sections/AboutSection';
-import { PortfolioSection } from './components/sections/PortfolioSection';
-import { ContactSection } from './components/sections/ContactSection';
+// Page Components
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import ServicesPage from './pages/ServicesPage';
+import PortfolioPage from './pages/PortfolioPage';
+import ContactPage from './pages/ContactPage';
 
 function App() {
   return (
@@ -25,29 +22,13 @@ function App() {
 
         {/* Main Content */}
         <main>
-          {/* Hero Section */}
-          <HeroSection />
-
-          {/* Services Overview */}
-          <ServicesSection />
-
-          {/* Website Development with 3D Laptop Animation */}
-          <WebsiteSection />
-
-          {/* App Development with 3D Phone Animation */}
-          <AppSection />
-
-          {/* Software Development with Unique Animation */}
-          <SoftwareSection />
-
-          {/* About Section */}
-          <AboutSection />
-
-          {/* Portfolio Section */}
-          <PortfolioSection />
-
-          {/* Contact Section */}
-          <ContactSection />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/services" element={<ServicesPage />} />
+            <Route path="/portfolio" element={<PortfolioPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+          </Routes>
         </main>
 
         {/* Footer */}

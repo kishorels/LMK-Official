@@ -1,53 +1,49 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronRight } from 'lucide-react';
 import { Button } from '../ui/button';
 import { cn } from '../../lib/utils';
 
 const LOGO_URL = '/lmk-logo.png';
 
 const navItems = [
-  { label: 'Home', href: '#home' },
-  { label: 'Services', href: '#services' },
-  { label: 'About', href: '#about' },
-  { label: 'Portfolio', href: '#portfolio' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
+  { label: 'About', href: '/about' },
+  { label: 'Portfolio', href: '/portfolio' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 export const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-
-      // Update active section based on scroll position
-      const sections = navItems.map(item => item.href.substring(1));
-      for (const section of sections.reverse()) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 100) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (href) => {
-    const element = document.getElementById(href.substring(1));
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+  // Close mobile menu on route change
+  useEffect(() => {
     setIsMobileMenuOpen(false);
+    window.scrollTo(0, 0); // Scroll to top on page change
+  }, [location.pathname]);
+
+  const isActive = (href) => {
+    if (href === '/') {
+      return location.pathname === '/';
+    }
+    return location.pathname.startsWith(href);
   };
+
+  // Determine if we're on a dark page (home) or light page
+  const isDarkPage = location.pathname === '/';
 
   return (
     <>
@@ -57,74 +53,84 @@ export const Navigation = () => {
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className={cn(
           'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-          isScrolled
-            ? 'bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-lg'
+          isScrolled || !isDarkPage
+            ? 'bg-white/90 backdrop-blur-xl border-b border-slate-200/50 shadow-lg shadow-slate-200/20'
             : 'bg-transparent'
         )}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <motion.a
-              href="#home"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection('#home');
-              }}
-              className="flex items-center gap-3"
+            <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <img
-                src={LOGO_URL}
-                alt="LMK Technology"
-                className="h-12 w-auto object-contain"
-              />
-            </motion.a>
+              <Link to="/" className="flex items-center gap-3">
+                <img
+                  src={LOGO_URL}
+                  alt="LMK Technology"
+                  className="h-12 w-auto object-contain"
+                />
+                <div className="hidden sm:block">
+                  <span className={cn(
+                    "font-display font-bold text-lg transition-colors",
+                    isScrolled || !isDarkPage ? 'text-slate-900' : 'text-white'
+                  )}>
+                    LMK
+                  </span>
+                  <span className={cn(
+                    "font-display font-medium text-lg ml-1 transition-colors",
+                    isScrolled || !isDarkPage ? 'text-teal-600' : 'text-teal-400'
+                  )}>
+                    Technology
+                  </span>
+                </div>
+              </Link>
+            </motion.div>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-1">
+            <div className="hidden md:flex items-center gap-1 bg-slate-100/80 backdrop-blur-sm rounded-full px-2 py-1.5">
               {navItems.map((item) => (
-                <motion.button
+                <motion.div
                   key={item.label}
-                  onClick={() => scrollToSection(item.href)}
-                  className={cn(
-                    'relative px-4 py-2 text-sm font-medium transition-colors',
-                    isScrolled
-                      ? activeSection === item.href.substring(1)
-                        ? 'text-foreground'
-                        : 'text-muted-foreground hover:text-foreground'
-                      : activeSection === item.href.substring(1)
-                        ? 'text-white'
-                        : 'text-white/70 hover:text-white'
-                  )}
-                  whileHover={{ y: -2 }}
-                  whileTap={{ y: 0 }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  {item.label}
-                  {activeSection === item.href.substring(1) && (
-                    <motion.div
-                      layoutId="activeNav"
-                      className="absolute bottom-0 left-2 right-2 h-0.5 bg-gradient-to-r from-primary via-secondary to-pink rounded-full"
-                    />
-                  )}
-                </motion.button>
+                  <Link
+                    to={item.href}
+                    className={cn(
+                      'relative px-4 py-2 text-sm font-medium rounded-full transition-all duration-200',
+                      isActive(item.href)
+                        ? 'bg-white text-slate-900 shadow-sm'
+                        : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                </motion.div>
               ))}
             </div>
 
             {/* CTA Button */}
             <div className="hidden md:block">
-              <Button
-                variant="glow"
-                onClick={() => scrollToSection('#contact')}
-              >
-                Get Started
-              </Button>
+              <Link to="/contact">
+                <Button
+                  className="bg-gradient-to-r from-teal-500 to-indigo-500 hover:from-teal-600 hover:to-indigo-600 text-white font-semibold px-6 py-2.5 rounded-full shadow-lg shadow-teal-500/25 hover:shadow-xl hover:shadow-teal-500/30 transition-all duration-300"
+                >
+                  Get Started
+                  <ChevronRight className="w-4 h-4 ml-1" />
+                </Button>
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden p-2 text-foreground"
+              className={cn(
+                "md:hidden p-2 rounded-full transition-colors",
+                isScrolled || !isDarkPage
+                  ? 'text-slate-900 hover:bg-slate-100'
+                  : 'text-white hover:bg-white/10'
+              )}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -142,32 +148,44 @@ export const Navigation = () => {
             exit={{ opacity: 0, y: -20 }}
             className="fixed inset-0 z-40 md:hidden"
           >
-            <div className="absolute inset-0 bg-background/95 backdrop-blur-xl">
-              <div className="flex flex-col items-center justify-center h-full gap-8">
+            <div className="absolute inset-0 bg-white">
+              <div className="flex flex-col pt-24 px-6">
                 {navItems.map((item, index) => (
-                  <motion.button
+                  <motion.div
                     key={item.label}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    onClick={() => scrollToSection(item.href)}
-                    className="text-2xl font-display font-semibold text-foreground hover:text-primary transition-colors"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.05 }}
                   >
-                    {item.label}
-                  </motion.button>
+                    <Link
+                      to={item.href}
+                      className={cn(
+                        "flex items-center justify-between py-4 border-b border-slate-100 text-lg font-medium transition-colors",
+                        isActive(item.href)
+                          ? 'text-teal-600'
+                          : 'text-slate-700 hover:text-teal-600'
+                      )}
+                    >
+                      {item.label}
+                      <ChevronRight className="w-5 h-5 text-slate-400" />
+                    </Link>
+                  </motion.div>
                 ))}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: navItems.length * 0.1 }}
+                  transition={{ delay: navItems.length * 0.05 }}
+                  className="mt-8"
                 >
-                  <Button
-                    variant="glow"
-                    size="lg"
-                    onClick={() => scrollToSection('#contact')}
-                  >
-                    Get Started
-                  </Button>
+                  <Link to="/contact" className="block">
+                    <Button
+                      className="w-full bg-gradient-to-r from-teal-500 to-indigo-500 hover:from-teal-600 hover:to-indigo-600 text-white font-semibold py-4 rounded-xl shadow-lg"
+                      size="lg"
+                    >
+                      Get Started
+                      <ChevronRight className="w-5 h-5 ml-2" />
+                    </Button>
+                  </Link>
                 </motion.div>
               </div>
             </div>

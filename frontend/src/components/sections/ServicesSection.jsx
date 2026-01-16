@@ -9,24 +9,21 @@ const services = [
     title: 'Website Development',
     description: 'Stunning, responsive websites that captivate your audience and drive conversions.',
     features: ['Responsive Design', 'SEO Optimized', 'Fast Loading', 'CMS Integration'],
-    color: 'primary',
-    gradient: 'from-primary to-primary/50',
+    color: 'teal-500',
   },
   {
     icon: Smartphone,
     title: 'App Development',
     description: 'Native and cross-platform mobile apps that deliver exceptional user experiences.',
     features: ['iOS & Android', 'Cross-Platform', 'Push Notifications', 'Offline Mode'],
-    color: 'secondary',
-    gradient: 'from-secondary to-secondary/50',
+    color: 'indigo-500',
   },
   {
     icon: Server,
     title: 'Software Development',
     description: 'Custom software solutions that streamline your business operations.',
     features: ['Custom CRM/ERP', 'API Development', 'Cloud Solutions', 'Database Design'],
-    color: 'accent',
-    gradient: 'from-accent to-accent/50',
+    color: 'purple-500',
   },
 ];
 
@@ -61,49 +58,53 @@ export const ServicesSection = () => {
             <span className="text-gradient-primary">Offer</span>
           </h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            Comprehensive digital solutions tailored to your business needs. 
+            Comprehensive digital solutions tailored to your business needs.
             From concept to launch, we've got you covered.
           </p>
         </motion.div>
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-y-16 gap-x-8">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
               initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.15 }}
-              className="group relative"
+              className="group"
             >
-              <div className="relative h-full glass-card rounded-2xl p-8 transition-all duration-300 hover:border-primary/50 flex flex-col">
-                {/* Icon */}
-                <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${service.gradient} flex items-center justify-center mb-6`}>
-                  <service.icon className="w-7 h-7 text-primary-foreground" />
+              <div className="uiverse-3d-parent">
+                <div
+                  className="uiverse-3d-card"
+                  style={{ '--card-gradient': `linear-gradient(135deg, ${service.color === 'teal-500' ? '#14b8a6' : service.color === 'indigo-500' ? '#6366f1' : '#a855f7'} 0%, ${service.color === 'teal-500' ? '#0d9488' : service.color === 'indigo-500' ? '#4f46e5' : '#9333ea'} 100%)` }}
+                >
+                  <div className="uiverse-3d-logo">
+                    <span className="uiverse-3d-circle uiverse-3d-circle1"></span>
+                    <span className="uiverse-3d-circle uiverse-3d-circle2"></span>
+                    <span className="uiverse-3d-circle uiverse-3d-circle3"></span>
+                    <span className="uiverse-3d-circle uiverse-3d-circle4"></span>
+                    <span className="uiverse-3d-circle uiverse-3d-circle5">
+                      <service.icon className="w-8 h-8" />
+                    </span>
+                  </div>
+                  <div className="uiverse-3d-glass"></div>
+                  <div className="uiverse-3d-content">
+                    <span className="title">{service.title}</span>
+                    <span className="text">
+                      {service.description}
+                    </span>
+                  </div>
+                  <div className="uiverse-3d-bottom">
+                    <div className="uiverse-3d-features-container">
+                      {service.features.map((feature, fidx) => (
+                        <span key={fidx} className="uiverse-3d-feature-tag">
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-
-                {/* Content */}
-                <h3 className="text-xl font-display font-bold text-foreground mb-3">
-                  {service.title}
-                </h3>
-                <p className="text-muted-foreground text-sm mb-6">
-                  {service.description}
-                </p>
-
-                {/* Features */}
-                <ul className="space-y-2 mt-auto">
-                  {service.features.map((feature) => (
-                    <li key={feature} className="flex items-center gap-2 text-sm">
-                      <div className={`w-1.5 h-1.5 rounded-full bg-${service.color}`} />
-                      <span className="text-muted-foreground">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Hover Glow */}
-                <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity -z-10`}
-                  style={{ background: `radial-gradient(circle at center, hsl(var(--${service.color}) / 0.1) 0%, transparent 70%)`, filter: 'blur(20px)' }}
-                />
               </div>
             </motion.div>
           ))}

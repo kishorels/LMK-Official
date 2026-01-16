@@ -147,26 +147,6 @@ const Particles = ({ id, init, options }) => {
 };
 
 export default function HeroSection() {
-  const [scrollY, setScrollY] = useState(0);
-
-  const particlesInit = useCallback(async (engine) => {
-    console.log('Particles initialized');
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  const opacity = Math.max(0, 1 - scrollY / 500);
-  const translateY = scrollY * 0.4;
-
   const services = [
     { icon: Code2, label: 'Web Development', desc: 'Modern & Responsive', gradient: 'from-teal-500 to-cyan-500' },
     { icon: Smartphone, label: 'App Development', desc: 'iOS & Android', gradient: 'from-indigo-500 to-purple-500' },
@@ -174,16 +154,15 @@ export default function HeroSection() {
   ];
 
   return (
-    <section id="home" className="relative min-h-screen overflow-hidden bg-[#020617]">
+    <section id="home" className="relative min-h-screen overflow-hidden bg-[#020617] bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-teal-900/20 via-slate-950 to-slate-950">
       {/* Background Effects */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-teal-500/5 blur-[120px] animate-pulse" style={{ animationDuration: '8s' }} />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-500/5 blur-[120px] animate-pulse" style={{ animationDuration: '10s' }} />
+        <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] rounded-full bg-teal-500/10 blur-[80px] animate-pulse" style={{ animationDuration: '8s' }} />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-indigo-500/10 blur-[80px] animate-pulse" style={{ animationDuration: '10s' }} />
+        <div className="absolute top-[20%] left-[30%] w-[40%] h-[40%] rounded-full bg-purple-500/5 blur-[60px]" />
 
         {/* Particles */}
         <Particles
-          id="tsparticles"
-          init={particlesInit}
           options={{
             background: {
               color: {
@@ -256,10 +235,7 @@ export default function HeroSection() {
       </div>
 
       {/* Content */}
-      <div
-        style={{ opacity, transform: `translateY(${translateY}px)` }}
-        className="relative z-10 w-full min-h-screen px-4 sm:px-6 lg:px-12 py-20 flex flex-col justify-between"
-      >
+      <div className="relative z-10 w-full min-h-screen px-4 sm:px-6 lg:px-12 py-20 flex flex-col justify-between">
         {/* Status Badge */}
         <div className="flex flex-col md:flex-row items-center justify-end gap-6 pt-4">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl hover:bg-white/10 hover:scale-105 transition-all duration-300 opacity-0 animate-fadeIn" style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}>
