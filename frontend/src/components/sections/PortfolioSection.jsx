@@ -37,7 +37,7 @@ const projects = [
     id: 3,
     title: 'Presentation Software',
     category: 'Software',
-    description: 'A powerful church presentation software for displaying song lyrics, Bible verses, and multimedia content during worship services. Built with modern technologies for smooth performance.',
+    description: 'A comprehensive church presentation software developed for Kumar Pastor, designed to display song lyrics, Bible verses, announcements, and multimedia content during worship services. Features real-time text synchronization, customizable themes, and seamless multimedia integration for an enhanced worship experience.',
     image: 'https://images.unsplash.com/photo-1568952433726-3896e3881c65?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHw0fHxhYnN0cmFjdCUyMHRlY2hub2xvZ3l8ZW58MHx8fGJsYWNrfDE3Njc4NTMwMDV8MA&ixlib=rb-4.1.0&q=85&w=800',
     technologies: ['Electron', 'React', 'SQLite', 'Node.js'],
     icon: Server,

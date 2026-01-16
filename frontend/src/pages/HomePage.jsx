@@ -67,21 +67,21 @@ const WhyChooseUs = () => {
 const TestimonialsSection = () => {
     const testimonials = [
         {
-            name: 'Sarah Johnson',
-            role: 'CEO, TechStart',
-            content: 'LMK Technology transformed our digital presence. Their attention to detail and technical expertise is unmatched.',
+            name: 'Kumar Pastor',
+            role: 'Pastor, Kumar Pastor Church',
+            content: 'The presentation software developed by LMK Technology has revolutionized our worship services. The seamless display of song lyrics, Bible verses, and multimedia content has greatly enhanced our congregation\'s experience. The real-time synchronization and customizable themes are exactly what we needed.',
             rating: 5,
         },
         {
-            name: 'Michael Chen',
-            role: 'Founder, AppVenture',
-            content: 'The mobile app they developed exceeded our expectations. Professional team with excellent communication.',
+            name: 'C Akash',
+            role: 'Junior Developer, Ordinal Technology',
+            content: 'Working with LMK Technology on the AquaRescue flood emergency app was an incredible experience. Their expertise in React Native and Firebase integration helped create a life-saving application that can send SOS alerts and share real-time location during emergencies.',
             rating: 5,
         },
         {
-            name: 'Emily Davis',
-            role: 'Director, Creative Co',
-            content: 'Outstanding work on our e-commerce platform. Sales increased by 200% within the first quarter.',
+            name: 'Sam Renault',
+            role: 'Cyber Security Expert, Renault',
+            content: 'After seeing the demo designs for our food delivery app, I\'m eagerly waiting for the completion. The UI/UX looks professional and user-friendly. LMK Technology\'s attention to detail in the design phase gives us confidence in the final product.',
             rating: 5,
         },
     ];
@@ -205,9 +205,9 @@ const CTASection = () => {
 // Featured Projects Preview
 const FeaturedProjects = () => {
     const projects = [
-        { title: 'E-Commerce Platform', category: 'Web Development', image: '/api/placeholder/600/400' },
-        { title: 'Food Delivery App', category: 'Mobile App', image: '/api/placeholder/600/400' },
-        { title: 'Medical Consultation App', category: 'Software', image: '/api/placeholder/600/400' },
+        { title: 'E-Commerce Platform', category: 'Web Development', image: 'https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?crop=entropy&cs=srgb&fm=jpg&w=800&q=85' },
+        { title: 'Food Delivery App', category: 'Mobile App', image: 'https://images.unsplash.com/photo-1633250391894-397930e3f5f2?crop=entropy&cs=srgb&fm=jpg&w=800&q=85' },
+        { title: 'Medical Consultation App', category: 'Software', image: 'https://images.unsplash.com/photo-1568952433726-3896e3881c65?crop=entropy&cs=srgb&fm=jpg&w=800&q=85' },
     ];
 
     return (
@@ -235,27 +235,30 @@ const FeaturedProjects = () => {
 
                 <div className="grid md:grid-cols-3 gap-8">
                     {projects.map((project, index) => (
-                        <motion.div
-                            key={project.title}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.15 }}
-                            className="group relative overflow-hidden rounded-2xl bg-white transition-all duration-300"
-                        >
-                            <div className="aspect-[4/3] bg-gradient-to-br from-slate-200 to-slate-300 relative overflow-hidden">
-                                <div className="absolute inset-0 bg-gradient-to-br from-teal-500/20 to-indigo-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    <Award className="w-16 h-16 text-slate-400" />
+                        <Link to="/portfolio" key={project.title}>
+                            <motion.div
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.15 }}
+                                className="group relative overflow-hidden rounded-2xl bg-white border border-slate-100 hover:border-slate-200 transition-all duration-300"
+                            >
+                                <div className="aspect-[4/3] relative overflow-hidden">
+                                    <img
+                                        src={project.image}
+                                        alt={project.title}
+                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                 </div>
-                            </div>
-                            <div className="p-6">
-                                <span className="text-sm font-medium text-teal-600">{project.category}</span>
-                                <h3 className="text-xl font-bold text-slate-900 mt-1 group-hover:text-teal-600 transition-colors">
-                                    {project.title}
-                                </h3>
-                            </div>
-                        </motion.div>
+                                <div className="p-6">
+                                    <span className="text-sm font-medium text-teal-600">{project.category}</span>
+                                    <h3 className="text-xl font-bold text-slate-900 mt-1 group-hover:text-teal-600 transition-colors">
+                                        {project.title}
+                                    </h3>
+                                </div>
+                            </motion.div>
+                        </Link>
                     ))}
                 </div>
             </div>
