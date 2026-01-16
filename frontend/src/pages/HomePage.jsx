@@ -46,7 +46,7 @@ const WhyChooseUs = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
-                            className="group relative p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:border-teal-200 transition-all duration-300"
+                            className="group relative p-6 bg-white rounded-2xl border border-slate-100 hover:border-teal-200 transition-all duration-300"
                         >
                             <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-teal-500 to-indigo-500 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
                                 <feature.icon className="w-7 h-7 text-white" />
@@ -114,7 +114,7 @@ const TestimonialsSection = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.15 }}
-                            className="relative p-8 bg-gradient-to-br from-slate-50 to-white rounded-2xl border border-slate-100 shadow-sm"
+                            className="relative p-8 bg-gradient-to-br from-slate-50 to-white rounded-2xl border border-slate-100"
                         >
                             {/* Quote mark */}
                             <div className="absolute top-6 right-6 text-6xl text-slate-200 font-serif">"</div>
@@ -180,7 +180,7 @@ const CTASection = () => {
                         <Link to="/contact">
                             <Button
                                 size="lg"
-                                className="bg-teal-500 text-white hover:bg-teal-600 font-semibold px-8 py-4 rounded-full shadow-lg shadow-teal-500/20 hover:shadow-xl transition-all duration-300"
+                                className="bg-teal-500 text-white hover:bg-teal-600 font-semibold px-8 py-4 rounded-full transition-all duration-300"
                             >
                                 Get Free Quote
                                 <ArrowRight className="w-5 h-5 ml-2" />
@@ -206,8 +206,8 @@ const CTASection = () => {
 const FeaturedProjects = () => {
     const projects = [
         { title: 'E-Commerce Platform', category: 'Web Development', image: '/api/placeholder/600/400' },
-        { title: 'Healthcare App', category: 'Mobile App', image: '/api/placeholder/600/400' },
-        { title: 'Enterprise CRM', category: 'Software', image: '/api/placeholder/600/400' },
+        { title: 'Food Delivery App', category: 'Mobile App', image: '/api/placeholder/600/400' },
+        { title: 'Medical Consultation App', category: 'Software', image: '/api/placeholder/600/400' },
     ];
 
     return (
@@ -241,7 +241,7 @@ const FeaturedProjects = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.15 }}
-                            className="group relative overflow-hidden rounded-2xl bg-white shadow-sm hover:shadow-xl transition-all duration-300"
+                            className="group relative overflow-hidden rounded-2xl bg-white transition-all duration-300"
                         >
                             <div className="aspect-[4/3] bg-gradient-to-br from-slate-200 to-slate-300 relative overflow-hidden">
                                 <div className="absolute inset-0 bg-gradient-to-br from-teal-500/20 to-indigo-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

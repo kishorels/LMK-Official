@@ -54,7 +54,7 @@ export const Navigation = () => {
         className={cn(
           'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
           isScrolled || !isDarkPage
-            ? 'bg-white/90 backdrop-blur-xl border-b border-slate-200/50 shadow-lg shadow-slate-200/20'
+            ? 'bg-white/90 backdrop-blur-xl border-b border-slate-200/50'
             : 'bg-transparent'
         )}
       >
@@ -101,7 +101,7 @@ export const Navigation = () => {
                     className={cn(
                       'relative px-4 py-2 text-sm font-medium rounded-full transition-all duration-200',
                       isActive(item.href)
-                        ? 'bg-white text-slate-900 shadow-sm'
+                        ? 'bg-white text-slate-900'
                         : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
                     )}
                   >
@@ -115,7 +115,7 @@ export const Navigation = () => {
             <div className="hidden md:block">
               <Link to="/contact">
                 <Button
-                  className="bg-gradient-to-r from-teal-500 to-indigo-500 hover:from-teal-600 hover:to-indigo-600 text-white font-semibold px-6 py-2.5 rounded-full shadow-lg shadow-teal-500/25 hover:shadow-xl hover:shadow-teal-500/30 transition-all duration-300"
+                  className="bg-gradient-to-r from-teal-500 to-indigo-500 hover:from-teal-600 hover:to-indigo-600 text-white font-semibold px-6 py-2.5 rounded-full transition-all duration-300"
                 >
                   Get Started
                   <ChevronRight className="w-4 h-4 ml-1" />
@@ -179,7 +179,7 @@ export const Navigation = () => {
                 >
                   <Link to="/contact" className="block">
                     <Button
-                      className="w-full bg-gradient-to-r from-teal-500 to-indigo-500 hover:from-teal-600 hover:to-indigo-600 text-white font-semibold py-4 rounded-xl shadow-lg"
+                      className="w-full bg-gradient-to-r from-teal-500 to-indigo-500 hover:from-teal-600 hover:to-indigo-600 text-white font-semibold py-4 rounded-xl"
                       size="lg"
                     >
                       Get Started

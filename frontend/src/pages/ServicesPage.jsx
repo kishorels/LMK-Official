@@ -7,7 +7,7 @@ import { SoftwareSection } from '../components/sections/SoftwareSection';
 const ServicesPage = () => {
     return (
         <div className="pt-20">
-            <ServicesSection />
+            <ServicesSection variant="minimal" />
             <WebsiteSection />
             <AppSection />
             <SoftwareSection />

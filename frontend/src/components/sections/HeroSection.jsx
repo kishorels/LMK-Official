@@ -238,7 +238,7 @@ export default function HeroSection() {
       <div className="relative z-10 w-full min-h-screen px-4 sm:px-6 lg:px-12 py-20 flex flex-col justify-between">
         {/* Status Badge */}
         <div className="flex flex-col md:flex-row items-center justify-end gap-6 pt-4">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl hover:bg-white/10 hover:scale-105 transition-all duration-300 opacity-0 animate-fadeIn" style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 hover:scale-105 transition-all duration-300 opacity-0 animate-fadeIn" style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}>
             <Sparkles className="w-4 h-4 text-teal-400" />
             <span className="text-sm font-semibold text-slate-200">Freelance Developer</span>
             <div className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
@@ -270,7 +270,7 @@ export default function HeroSection() {
             <div className="mb-8 opacity-0 animate-fadeIn" style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}>
               <button
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="group relative px-8 py-3.5 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold text-base transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(34,211,238,0.5)] active:scale-100 overflow-hidden"
+                className="group relative px-8 py-3.5 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold text-base transition-all duration-300 hover:scale-105 active:scale-100 overflow-hidden"
               >
                 <span className="relative z-10">Let's Work Together</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -291,7 +291,7 @@ export default function HeroSection() {
                   <div className={`absolute inset-0 bg-gradient-to-r ${service.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
 
                   {/* Icon */}
-                  <div className={`relative p-3 rounded-xl bg-gradient-to-br ${service.gradient} shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}>
+                  <div className={`relative p-3 rounded-xl bg-gradient-to-br ${service.gradient} group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}>
                     <service.icon className="w-6 h-6 text-white" />
                   </div>
 
