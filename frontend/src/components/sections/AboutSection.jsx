@@ -189,7 +189,7 @@ export const AboutSection = () => {
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold mb-6">
             <span className="text-slate-900">Meet the Team Behind </span>
             <span className="bg-gradient-to-r from-teal-500 via-indigo-500 to-purple-500 bg-clip-text text-transparent">
-              LMK Technology
+              LMK SoftTech
             </span>
           </h2>
           <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
@@ -306,7 +306,7 @@ export const AboutSection = () => {
                 Building Digital Excellence, One Project at a Time
               </h3>
               <p className="text-slate-600 leading-relaxed mb-4">
-                At LMK Technology, we believe in the power of technology to transform businesses.
+                At LMK SoftTech, we believe in the power of technology to transform businesses.
                 We bring a unique blend of technical expertise and creative vision to every project,
                 ensuring your digital presence stands out in today's competitive landscape.
               </p>

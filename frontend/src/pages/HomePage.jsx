@@ -69,19 +69,19 @@ const TestimonialsSection = () => {
         {
             name: 'Kumar Pastor',
             role: 'Pastor, Kumar Pastor Church',
-            content: 'The presentation software developed by LMK Technology has revolutionized our worship services. The seamless display of song lyrics, Bible verses, and multimedia content has greatly enhanced our congregation\'s experience. The real-time synchronization and customizable themes are exactly what we needed.',
+            content: 'The presentation software developed by LMK SoftTech has revolutionized our worship services. The seamless display of song lyrics, Bible verses, and multimedia content has greatly enhanced our congregation\'s experience. The real-time synchronization and customizable themes are exactly what we needed.',
             rating: 5,
         },
         {
             name: 'C Akash',
             role: 'Junior Developer, Ordinal Technology',
-            content: 'Working with LMK Technology on the AquaRescue flood emergency app was an incredible experience. Their expertise in React Native and Firebase integration helped create a life-saving application that can send SOS alerts and share real-time location during emergencies.',
+            content: 'Working with LMK SoftTech on the AquaRescue flood emergency app was an incredible experience. Their expertise in React Native and Firebase integration helped create a life-saving application that can send SOS alerts and share real-time location during emergencies.',
             rating: 5,
         },
         {
             name: 'Sam Renault',
             role: 'Cyber Security Expert, Renault',
-            content: 'After seeing the demo designs for our food delivery app, I\'m eagerly waiting for the completion. The UI/UX looks professional and user-friendly. LMK Technology\'s attention to detail in the design phase gives us confidence in the final product.',
+            content: 'After seeing the demo designs for our food delivery app, I\'m eagerly waiting for the completion. The UI/UX looks professional and user-friendly. LMK SoftTech\'s attention to detail in the design phase gives us confidence in the final product.',
             rating: 5,
         },
     ];

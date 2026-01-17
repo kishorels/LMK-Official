@@ -68,7 +68,7 @@ export const Navigation = () => {
               <Link to="/" className="flex items-center gap-3">
                 <img
                   src={LOGO_URL}
-                  alt="LMK Technology"
+                  alt="LMK SoftTech"
                   className="h-12 w-auto object-contain"
                 />
                 <div className="hidden sm:block">

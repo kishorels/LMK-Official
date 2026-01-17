@@ -49,7 +49,7 @@ export const Footer = () => {
             >
               <img
                 src={LOGO_URL}
-                alt="LMK Technology"
+                alt="LMK SoftTech"
                 className="h-14 w-auto object-contain"
               />
             </motion.a>
@@ -136,7 +136,7 @@ export const Footer = () => {
         {/* Bottom Section */}
         <div className="mt-12 pt-8 border-t border-border/50 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            © {currentYear} LMK Technology. All rights reserved. Developed by Kishore L M.
+            © {currentYear} LMK SoftTech. All rights reserved. Developed by Kishore L M.
           </p>
 
           {/* Social Links */}
