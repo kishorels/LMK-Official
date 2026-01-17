@@ -5,7 +5,7 @@ import { Menu, X, ChevronRight } from 'lucide-react';
 import { Button } from '../ui/button';
 import { cn } from '../../lib/utils';
 
-const LOGO_URL = '/lmk-logo.png';
+const LOGO_URL = '/lmk-logo';
 
 const navItems = [
   { label: 'Home', href: '/' },
@@ -69,22 +69,10 @@ export const Navigation = () => {
                 <img
                   src={LOGO_URL}
                   alt="LMK SoftTech"
-                  className="h-12 w-auto object-contain"
+                  className="h-28 w-auto object-contain"
                 />
-                <div className="hidden sm:block">
-                  <span className={cn(
-                    "font-display font-bold text-lg transition-colors",
-                    isScrolled || !isDarkPage ? 'text-slate-900' : 'text-white'
-                  )}>
-                    LMK
-                  </span>
-                  <span className={cn(
-                    "font-display font-medium text-lg ml-1 transition-colors",
-                    isScrolled || !isDarkPage ? 'text-teal-600' : 'text-teal-400'
-                  )}>
-                    Technology
-                  </span>
-                </div>
+
+
               </Link>
             </motion.div>
 

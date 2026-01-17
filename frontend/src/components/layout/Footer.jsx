@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Github, Linkedin, Twitter } from 'lucide-react';
 
-const LOGO_URL = '/lmk-logo.png';
+const LOGO_URL = '/lmk-logo';
 
 const footerLinks = {
   services: [
@@ -50,7 +50,7 @@ export const Footer = () => {
               <img
                 src={LOGO_URL}
                 alt="LMK SoftTech"
-                className="h-14 w-auto object-contain"
+                className="h-24 w-auto object-contain"
               />
             </motion.a>
             <p className="mt-4 text-muted-foreground max-w-sm">

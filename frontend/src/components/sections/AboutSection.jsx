@@ -8,10 +8,8 @@ import { Badge } from '../ui/badge';
 import { Link } from 'react-router-dom';
 
 const stats = [
-  { value: '50+', label: 'Projects Delivered', icon: Briefcase, color: 'from-teal-500 to-teal-600' },
   { value: '100%', label: 'Client Satisfaction', icon: Heart, color: 'from-pink-500 to-rose-500' },
   { value: '24/7', label: 'Support Available', icon: Zap, color: 'from-indigo-500 to-purple-500' },
-  { value: '3+', label: 'Years Experience', icon: Award, color: 'from-amber-500 to-orange-500' },
 ];
 
 const values = [
@@ -203,10 +201,12 @@ export const AboutSection = () => {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-20"
+          className="flex flex-wrap justify-center gap-6 lg:gap-10 mb-20"
         >
           {stats.map((stat, index) => (
-            <StatCard key={stat.label} stat={stat} index={index} isInView={isInView} />
+            <div key={stat.label} className="w-full sm:w-64">
+              <StatCard stat={stat} index={index} isInView={isInView} />
+            </div>
           ))}
         </motion.div>
 
@@ -244,12 +244,12 @@ export const AboutSection = () => {
                   >
                     <div className="w-full h-full rounded-xl bg-white flex items-center justify-center">
                       <span className="text-4xl font-display font-bold bg-gradient-to-r from-teal-600 to-indigo-600 bg-clip-text text-transparent">
-                        KLM
+                        LMK
                       </span>
                     </div>
                   </motion.div>
 
-                  <h3 className="text-2xl font-display font-bold text-slate-900">Kishore L M</h3>
+                  <h3 className="text-2xl font-display font-bold text-slate-900">L M Kishore </h3>
                   <p className="text-teal-600 font-medium mb-4">Founder & Lead Developer</p>
 
                   {/* Bio */}
