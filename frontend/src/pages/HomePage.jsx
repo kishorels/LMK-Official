@@ -205,9 +205,21 @@ const CTASection = () => {
 // Featured Projects Preview
 const FeaturedProjects = () => {
     const projects = [
-        { title: 'E-Commerce Platform', category: 'Web Development', image: 'https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?crop=entropy&cs=srgb&fm=jpg&w=800&q=85' },
-        { title: 'Food Delivery App', category: 'Mobile App', image: 'https://images.unsplash.com/photo-1633250391894-397930e3f5f2?crop=entropy&cs=srgb&fm=jpg&w=800&q=85' },
-        { title: 'Medical Consultation App', category: 'Software', image: 'https://images.unsplash.com/photo-1568952433726-3896e3881c65?crop=entropy&cs=srgb&fm=jpg&w=800&q=85' },
+        {
+            title: 'E-Commerce Platform',
+            category: 'Web Development',
+            image: 'https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?crop=entropy&cs=srgb&fm=webp&w=600&q=75'
+        },
+        {
+            title: 'Food Delivery App',
+            category: 'Mobile App',
+            image: 'https://images.unsplash.com/photo-1633250391894-397930e3f5f2?crop=entropy&cs=srgb&fm=webp&w=600&q=75'
+        },
+        {
+            title: 'Medical Consultation App',
+            category: 'Software',
+            image: 'https://images.unsplash.com/photo-1568952433726-3896e3881c65?crop=entropy&cs=srgb&fm=webp&w=600&q=75'
+        },
     ];
 
     return (

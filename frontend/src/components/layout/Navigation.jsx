@@ -5,7 +5,7 @@ import { Menu, X, ChevronRight } from 'lucide-react';
 import { Button } from '../ui/button';
 import { cn } from '../../lib/utils';
 
-const LOGO_URL = '/lmk-logo';
+const LOGO_URL = '/lmk-logo.webp';
 
 const navItems = [
   { label: 'Home', href: '/' },
