@@ -23,9 +23,9 @@ const projects = [
   },
   {
     id: 2,
-    title: 'AquaRescue App',
+    title: 'MedCode App',
     category: 'Mobile App',
-    description: 'AquaRescue is a fast and reliable flood emergency app that lets users send SOS alerts, share live location, and receive critical safety updates when every second matters.',
+    description: ' MedBook is a comprehensive healthcare platform featuring role-based access for patients, doctors, and hospitals, offering appointment booking, AI-powered health assistance, and medical record management.',
     image: 'https://images.unsplash.com/photo-1633250391894-397930e3f5f2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwxfHxtb2JpbGUlMjBhcHAlMjBkZXZlbG9wbWVudHxlbnwwfHx8fDE3Njc4NTMwMTR8MA&ixlib=rb-4.1.0&q=85&w=800',
     technologies: ['React Native', 'Firebase', 'Redux', 'Maps API'],
     icon: Smartphone,
