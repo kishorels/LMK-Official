@@ -6,6 +6,7 @@ import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
 import { Card, CardContent } from '../ui/card';
+import emailjs from '@emailjs/browser';
 
 const contactInfo = [
   { icon: Mail, label: 'Email', value: 'kishorepa64@gmail.com', href: 'mailto:kishorepa64@gmail.com', color: 'text-primary' },
@@ -35,16 +36,35 @@ export const ContactSection = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    setFormState({ name: '', email: '', subject: '', message: '' });
-    
-    // Reset success state after 5 seconds
-    setTimeout(() => setIsSubmitted(false), 5000);
+
+    try {
+      // Send email using EmailJS
+      const templateParams = {
+        from_name: formState.name,
+        from_email: formState.email,
+        subject: formState.subject,
+        message: formState.message,
+        to_email: 'kishorepa64@gmail.com',
+      };
+
+      await emailjs.send(
+        'service_4zmo67o',
+        'template_qkacdr4',
+        templateParams,
+        '2qvtGHXpgNJABVWcG'
+      );
+
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+      setFormState({ name: '', email: '', subject: '', message: '' });
+
+      // Reset success state after 5 seconds
+      setTimeout(() => setIsSubmitted(false), 5000);
+    } catch (error) {
+      console.error('Error sending email:', error);
+      setIsSubmitting(false);
+      alert('Failed to send message. Please configure EmailJS or email directly at kishorepa64@gmail.com');
+    }
   };
 
   return (

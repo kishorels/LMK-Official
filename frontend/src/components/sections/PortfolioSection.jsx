@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import {
   FolderOpen, ExternalLink, Globe, Smartphone, Server, X,
-  ArrowRight, Star, Layers, Code2, Sparkles
+  ArrowRight, Star, Layers, Sparkles
 } from 'lucide-react';
 import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
@@ -10,15 +10,13 @@ import { Button } from '../ui/button';
 const projects = [
   {
     id: 1,
-    title: 'Church Website',
+    title: 'E-commerce Site',
     category: 'Website',
-    description: 'A modern church website designed to share worship services, church activities, announcements, and faith-based content. Features a beautiful, responsive design with easy content management.',
-    image: 'https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwxfHx3ZWIlMjBkZXZlbG9wbWVudCUyMGNvZGluZ3xlbnwwfHx8fDE3Njc4NTMwMDl8MA&ixlib=rb-4.1.0&q=85&w=800',
-    technologies: ['React', 'Node.js', 'Tailwind CSS', 'Firebase'],
+    description: 'A modern e-commerce platform showcasing physical products and food items with cart, checkout-ready architecture, category browsing, and responsive design. Built for selling goods and F&B, not service listings.',
+    image: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwxfHxzaG9wcGluZyUyMG9ubGluZXxlbnwwfHx8fDE3MzgyNDU2MDB8MA&ixlib=rb-4.1.0&q=85&w=800',
     icon: Globe,
     gradient: 'from-teal-500 to-emerald-500',
     bgGradient: 'from-teal-500/20 via-emerald-500/10 to-transparent',
-    url: 'https://thuthichristianassembly.netlify.app/',
     featured: true,
   },
   {
@@ -26,8 +24,7 @@ const projects = [
     title: 'MedCode App',
     category: 'Mobile App',
     description: ' MedBook is a comprehensive healthcare platform featuring role-based access for patients, doctors, and hospitals, offering appointment booking, AI-powered health assistance, and medical record management.',
-    image: 'https://images.unsplash.com/photo-1633250391894-397930e3f5f2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwxfHxtb2JpbGUlMjBhcHAlMjBkZXZlbG9wbWVudHxlbnwwfHx8fDE3Njc4NTMwMTR8MA&ixlib=rb-4.1.0&q=85&w=800',
-    technologies: ['React Native', 'Firebase', 'Redux', 'Maps API'],
+    image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwxfHxkb2N0b3IlMjBhcHBvaW50bWVudHxlbnwwfHx8fDE3MzgyNDU2MDB8MA&ixlib=rb-4.1.0&q=85&w=800',
     icon: Smartphone,
     gradient: 'from-indigo-500 to-purple-500',
     bgGradient: 'from-indigo-500/20 via-purple-500/10 to-transparent',
@@ -35,11 +32,10 @@ const projects = [
   },
   {
     id: 3,
-    title: 'Presentation Software',
+    title: 'Chruch Presentation Software',
     category: 'Software',
     description: 'A comprehensive church presentation software developed for Kumar Pastor, designed to display song lyrics, Bible verses, announcements, and multimedia content during worship services. Features real-time text synchronization, customizable themes, and seamless multimedia integration for an enhanced worship experience.',
-    image: 'https://images.unsplash.com/photo-1568952433726-3896e3881c65?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHw0fHxhYnN0cmFjdCUyMHRlY2hub2xvZ3l8ZW58MHx8fGJsYWNrfDE3Njc4NTMwMDV8MA&ixlib=rb-4.1.0&q=85&w=800',
-    technologies: ['Electron', 'React', 'SQLite', 'Node.js'],
+    image: 'https://images.unsplash.com/photo-1438232992991-995b7058bbb3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwxfHxjaHVyY2glMjB3b3JzaGlwfGVufDB8fHx8MTczODI0NTYwMHww&ixlib=rb-4.1.0&q=85&w=800',
     icon: Server,
     gradient: 'from-pink-500 to-rose-500',
     bgGradient: 'from-pink-500/20 via-rose-500/10 to-transparent',
@@ -121,26 +117,9 @@ const ProjectCard = ({ project, index, onClick }) => (
         <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-teal-600 transition-colors">
           {project.title}
         </h3>
-        <p className="text-slate-600 text-sm mb-4 line-clamp-2">
+        <p className="text-slate-600 text-sm line-clamp-2">
           {project.description}
         </p>
-
-        {/* Technologies */}
-        <div className="flex flex-wrap gap-2">
-          {project.technologies.slice(0, 3).map((tech) => (
-            <span
-              key={tech}
-              className="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-100 text-slate-600 group-hover:bg-teal-50 group-hover:text-teal-700 transition-colors"
-            >
-              {tech}
-            </span>
-          ))}
-          {project.technologies.length > 3 && (
-            <span className="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-100 text-slate-500">
-              +{project.technologies.length - 3}
-            </span>
-          )}
-        </div>
       </div>
     </div>
   </motion.div>
@@ -209,28 +188,6 @@ const ProjectModal = ({ project, onClose }) => (
         <p className="text-slate-600 leading-relaxed mb-6">
           {project.description}
         </p>
-
-        {/* Technologies */}
-        <div className="mb-8">
-          <div className="flex items-center gap-2 text-sm font-semibold text-slate-700 mb-3">
-            <Code2 className="w-4 h-4" />
-            Technologies Used
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {project.technologies.map((tech) => (
-              <motion.span
-                key={tech}
-                whileHover={{ scale: 1.05 }}
-                className={`px-4 py-2 text-sm font-medium rounded-xl bg-gradient-to-r ${project.gradient} bg-opacity-10 text-slate-700 border border-slate-200 hover:border-transparent hover:bg-opacity-100 hover:text-white transition-all cursor-default`}
-                style={{
-                  background: 'linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,1))',
-                }}
-              >
-                {tech}
-              </motion.span>
-            ))}
-          </div>
-        </div>
 
         {/* Action Button */}
         {project.url ? (
@@ -319,7 +276,7 @@ export const PortfolioSection = () => {
           >
             <Badge variant="gradient" className="mb-4 px-4 py-2">
               <FolderOpen className="w-4 h-4 mr-2" />
-              Portfolio
+              Products
             </Badge>
           </motion.div>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold mb-6">
@@ -329,7 +286,7 @@ export const PortfolioSection = () => {
             </span>
           </h2>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            Explore our portfolio of successful projects that showcase our expertise
+            Explore our products that showcase our expertise
             in web development, mobile apps, and software solutions.
           </p>
         </motion.div>

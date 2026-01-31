@@ -75,7 +75,7 @@ const TestimonialsSection = () => {
         {
             name: 'C Akash',
             role: 'Junior Developer, Ordinal Technology',
-            content: 'Working with LMK SoftTech on the AquaRescue flood emergency app was an incredible experience. Their expertise in React Native and Firebase integration helped create a life-saving application that can send SOS alerts and share real-time location during emergencies.',
+            content: 'Working with LMK SoftTech on the Medcode healthcare app was an incredible experience. They created a comprehensive healthcare platform that offers appointment booking, AI-powered health assistance, and medical record management. The user experience is seamless and intuitive.',
             rating: 5,
         },
         {

@@ -4,6 +4,7 @@ import { Sparkles, Code2, Smartphone, Server } from 'lucide-react';
 // Simulating tsparticles - in your actual app, import from @tsparticles/react
 const Particles = ({ id, init, options }) => {
   const canvasRef = React.useRef(null);
+  const animationRef = React.useRef(null);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -59,9 +60,30 @@ const Particles = ({ id, init, options }) => {
       }
     }
 
-    for (let i = 0; i < particleCount; i++) {
-      particles.push(new Particle());
-    }
+    // Create particles in batches to reduce initial load
+    const createParticles = () => {
+      const batchSize = 20;
+      let created = 0;
+
+      const createBatch = () => {
+        const remaining = particleCount - created;
+        const toCreate = Math.min(batchSize, remaining);
+
+        for (let i = 0; i < toCreate; i++) {
+          particles.push(new Particle());
+        }
+
+        created += toCreate;
+
+        if (created < particleCount) {
+          requestAnimationFrame(createBatch);
+        }
+      };
+
+      createBatch();
+    };
+
+    createParticles();
 
     const connectParticles = () => {
       const linkDistance = options.particles.links.distance || 150;
@@ -102,10 +124,13 @@ const Particles = ({ id, init, options }) => {
         connectParticles();
       }
 
-      requestAnimationFrame(animate);
+      animationRef.current = requestAnimationFrame(animate);
     };
 
-    animate();
+    // Start animation after a small delay to reduce initial load
+    const startAnimation = setTimeout(() => {
+      animate();
+    }, 100);
 
     const handleMouseMove = (e) => {
       mouse.x = e.clientX;
@@ -136,6 +161,10 @@ const Particles = ({ id, init, options }) => {
     window.addEventListener('resize', handleResize);
 
     return () => {
+      clearTimeout(startAnimation);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseleave', handleMouseLeave);
       window.removeEventListener('click', handleClick);
@@ -169,7 +198,7 @@ export default function HeroSection() {
                 value: "transparent",
               },
             },
-            fpsLimit: 120,
+            fpsLimit: 144,
             interactivity: {
               events: {
                 onClick: {
@@ -187,8 +216,8 @@ export default function HeroSection() {
                   quantity: 4,
                 },
                 repulse: {
-                  distance: 200,
-                  duration: 0.4,
+                  distance: 250,
+                  duration: 0.2,
                 },
               },
             },
@@ -210,7 +239,7 @@ export default function HeroSection() {
                   default: "bounce",
                 },
                 random: false,
-                speed: 3,
+                speed: 4,
                 straight: false,
               },
               number: {
