@@ -70,6 +70,7 @@ export const Navigation = () => {
                   src={LOGO_URL}
                   alt="LMK SoftTech"
                   className="h-28 w-auto object-contain"
+                  fetchPriority="high"
                 />
 
 

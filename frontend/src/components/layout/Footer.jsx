@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Github, Linkedin, Twitter } from 'lucide-react';
 
-const LOGO_URL = '/lmk-logo';
+const LOGO_URL = '/lmk-logo.webp';
 
 const footerLinks = {
   services: [
