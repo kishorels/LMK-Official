@@ -72,6 +72,9 @@ const ProjectCard = ({ project, index, onClick }) => (
           src={project.image}
           alt={project.title}
           className="w-full h-full object-cover"
+          width="600"
+          height="450"
+          loading="lazy"
           whileHover={{ scale: 1.08 }}
           transition={{ duration: 0.6 }}
         />
@@ -167,6 +170,9 @@ const ProjectModal = ({ project, onClose }) => (
           src={project.image}
           alt={project.title}
           className="w-full h-full object-cover"
+          width="1200"
+          height="675"
+          loading="lazy"
         />
         <div className={`absolute inset-0 bg-gradient-to-t ${project.bgGradient} from-white via-white/50 to-transparent`} />
 

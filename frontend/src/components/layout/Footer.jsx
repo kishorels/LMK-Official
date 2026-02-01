@@ -9,18 +9,6 @@ const footerLinks = {
     { label: 'Website Development', href: '#services' },
     { label: 'App Development', href: '#services' },
     { label: 'Software Development', href: '#services' },
-    { label: 'UI/UX Design', href: '#services' },
-  ],
-  company: [
-    { label: 'About Us', href: '#about' },
-    { label: 'Portfolio', href: '#portfolio' },
-    { label: 'Contact', href: '#contact' },
-    { label: 'Careers', href: '#' },
-  ],
-  legal: [
-    { label: 'Privacy Policy', href: '#' },
-    { label: 'Terms of Service', href: '#' },
-    { label: 'Cookie Policy', href: '#' },
   ],
 };
 
@@ -39,7 +27,7 @@ export const Footer = () => {
       <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand Section */}
           <div className="lg:col-span-2">
             <motion.a
@@ -51,46 +39,29 @@ export const Footer = () => {
                 src={LOGO_URL}
                 alt="LMK SoftTech"
                 className="h-24 w-auto object-contain"
+                width="144"
+                height="96"
+                loading="lazy"
               />
             </motion.a>
-            <p className="mt-4 text-muted-foreground max-w-sm">
+            <p className="mt-4 text-muted-foreground max-w-md">
               Transforming ideas into digital reality. We create innovative websites,
-              mobile apps, and software solutions that drive business growth.
+              mobile apps, and software solutions that drive business growth through
+              cutting-edge technology and user-centric design.
             </p>
-
-            {/* Contact Info */}
-            <div className="mt-6 space-y-3">
-              <a
-                href="mailto:kishorepa64@gmail.com"
-                className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <Mail size={18} className="text-primary" />
-                kishorepa64@gmail.com
-              </a>
-              <a
-                href="tel:+916374308218"
-                className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <Phone size={18} className="text-secondary" />
-                +91 6374308218
-              </a>
-              <div className="flex items-center gap-3 text-muted-foreground">
-                <MapPin size={18} className="text-pink" />
-                Nagercoil, Tamil Nadu, India
-              </div>
-            </div>
           </div>
 
           {/* Services Links */}
           <div>
-            <h4 className="font-display font-semibold text-foreground mb-4">Services</h4>
-            <ul className="space-y-3">
+            <h4 className="font-display font-semibold text-foreground mb-6 uppercase tracking-wider text-sm">Services</h4>
+            <ul className="space-y-4">
               {footerLinks.services.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                    className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2"
                   >
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary/40" />
                     {link.label}
                   </a>
                 </li>
@@ -98,38 +69,35 @@ export const Footer = () => {
             </ul>
           </div>
 
-          {/* Company Links */}
+          {/* Contact Details Section */}
           <div>
-            <h4 className="font-display font-semibold text-foreground mb-4">Company</h4>
-            <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-muted-foreground hover:text-foreground transition-colors text-sm"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Legal Links */}
-          <div>
-            <h4 className="font-display font-semibold text-foreground mb-4">Legal</h4>
-            <ul className="space-y-3">
-              {footerLinks.legal.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-muted-foreground hover:text-foreground transition-colors text-sm"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <h4 className="font-display font-semibold text-foreground mb-6 uppercase tracking-wider text-sm">Contact Us</h4>
+            <div className="space-y-4">
+              <a
+                href="mailto:kishorepa64@gmail.com"
+                className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors text-sm group"
+              >
+                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                  <Mail size={16} className="text-primary" />
+                </div>
+                kishorepa64@gmail.com
+              </a>
+              <a
+                href="tel:+916374308218"
+                className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors text-sm group"
+              >
+                <div className="w-8 h-8 rounded-lg bg-secondary/10 flex items-center justify-center group-hover:bg-secondary/20 transition-colors">
+                  <Phone size={16} className="text-secondary" />
+                </div>
+                +91 6374308218
+              </a>
+              <div className="flex items-center gap-3 text-muted-foreground text-sm group">
+                <div className="w-8 h-8 rounded-lg bg-pink/10 flex items-center justify-center">
+                  <MapPin size={16} className="text-pink" />
+                </div>
+                Nagercoil, Tamil Nadu, India
+              </div>
+            </div>
           </div>
         </div>
 
@@ -145,8 +113,8 @@ export const Footer = () => {
               <motion.a
                 key={social.label}
                 href={social.href}
-                className="p-2 rounded-lg bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted transition-all"
-                whileHover={{ y: -2, scale: 1.1 }}
+                className="p-2.5 rounded-xl bg-muted/50 text-muted-foreground hover:text-foreground hover:bg-muted border border-border/50 hover:border-primary/50 transition-all"
+                whileHover={{ y: -4, scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label={social.label}
               >

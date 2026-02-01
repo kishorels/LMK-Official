@@ -70,10 +70,10 @@ export const Navigation = () => {
                   src={LOGO_URL}
                   alt="LMK SoftTech"
                   className="h-28 w-auto object-contain"
+                  width="168"
+                  height="112"
                   fetchPriority="high"
                 />
-
-
               </Link>
             </motion.div>
 
@@ -126,10 +126,10 @@ export const Navigation = () => {
             </button>
           </div>
         </div>
-      </motion.nav>
+      </motion.nav >
 
       {/* Mobile Menu */}
-      <AnimatePresence>
+      < AnimatePresence >
         {isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -179,8 +179,9 @@ export const Navigation = () => {
               </div>
             </div>
           </motion.div>
-        )}
-      </AnimatePresence>
+        )
+        }
+      </AnimatePresence >
     </>
   );
 };

@@ -282,8 +282,7 @@ export default function HeroSection() {
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight text-white mb-2">
                 Hi, I'm <br />
                 <span
-                  className="bg-gradient-to-r from-teal-400 via-indigo-400 to-violet-400 bg-clip-text text-transparent"
-                  style={{ backgroundSize: '200% auto', animation: 'gradient 4s linear infinite' }}
+                  className="bg-gradient-to-r from-teal-400 via-indigo-400 to-violet-400 bg-clip-text text-transparent text-gradient-animate"
                 >
                   Your Developer
                 </span>
@@ -345,11 +344,18 @@ export default function HeroSection() {
           to { opacity: 1; transform: translateY(0); } 
         }
         @keyframes gradient { 
-          0%, 100% { background-position: 0% 50%; } 
-          50% { background-position: 100% 50%; } 
+          0% { background-position: 0% 50%; } 
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
         }
         .animate-fadeIn { 
           animation: fadeIn 0.8s ease-out; 
+        }
+        .text-gradient-animate {
+          background-size: 200% auto;
+          animation: gradient 6s linear infinite;
+          will-change: background-position;
+          transform: translateZ(0);
         }
       `}</style>
     </section>
