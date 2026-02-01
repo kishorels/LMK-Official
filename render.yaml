@@ -1,9 +1,8 @@
 services:
-  - type: web
+  - type: static
     name: lmk-official
-    env: static
     buildCommand: npm install && npm run build
-    publishPath: build
+    staticPublishPath: build
     rootDir: frontend
     routes:
       # Rewrites all requests to index.html for React Router support
