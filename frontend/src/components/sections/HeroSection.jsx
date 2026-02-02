@@ -22,8 +22,8 @@ const Particles = memo(({ id, options }) => {
     updateSize();
 
     const particles = [];
-    // Drastically reduced particle count for performance (53 -> 90+ target)
-    const particleCount = typeof window !== 'undefined' && window.innerWidth < 1024 ? 20 : 40;
+    // Restored prominent particle count (balanced for performance)
+    const particleCount = typeof window !== 'undefined' && window.innerWidth < 1024 ? 40 : 80;
 
     class Particle {
       constructor() {
@@ -33,10 +33,10 @@ const Particles = memo(({ id, options }) => {
       reset() {
         this.x = Math.random() * window.innerWidth;
         this.y = Math.random() * window.innerHeight;
-        this.vx = (Math.random() - 0.5) * 0.5;
-        this.vy = (Math.random() - 0.5) * 0.5;
-        this.size = Math.random() * 1.5 + 0.5;
-        const colors = ['#14b8a6', '#6366f1'];
+        this.vx = (Math.random() - 0.5) * 0.8;
+        this.vy = (Math.random() - 0.5) * 0.8;
+        this.size = Math.random() * 2 + 0.5;
+        const colors = ['#14b8a6', '#6366f1', '#22d3ee'];
         this.color = colors[Math.floor(Math.random() * colors.length)];
       }
 
@@ -50,7 +50,7 @@ const Particles = memo(({ id, options }) => {
 
       draw() {
         ctx.fillStyle = this.color;
-        ctx.globalAlpha = 0.3;
+        ctx.globalAlpha = 0.5;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -72,7 +72,7 @@ const Particles = memo(({ id, options }) => {
         // Optimized connection logic - only draw lines for nearby particles
         // Limit to 20 connections per frame to prevent TBT issues
         let connections = 0;
-        for (let j = i + 1; j < particles.length && connections < 5; j++) {
+        for (let j = i + 1; j < particles.length && connections < 8; j++) {
           const p2 = particles[j];
           const dx = p1.x - p2.x;
           const dy = p1.y - p2.y;
@@ -81,8 +81,8 @@ const Particles = memo(({ id, options }) => {
           if (distSq < 150 * 150) {
             connections++;
             ctx.strokeStyle = p1.color;
-            ctx.globalAlpha = (1 - Math.sqrt(distSq) / 150) * 0.15;
-            ctx.lineWidth = 0.5;
+            ctx.globalAlpha = (1 - Math.sqrt(distSq) / 150) * 0.25;
+            ctx.lineWidth = 0.8;
             ctx.beginPath();
             ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(p2.x, p2.y);
@@ -94,10 +94,8 @@ const Particles = memo(({ id, options }) => {
       animationRef.current = requestAnimationFrame(animate);
     };
 
-    // Start animation with a delay to prioritize initial LCP
-    const startDelay = setTimeout(() => {
-      animate();
-    }, 1000);
+    // Immediate start for better user perception
+    animate();
 
     const handleResize = () => {
       updateSize();
@@ -106,13 +104,12 @@ const Particles = memo(({ id, options }) => {
     window.addEventListener('resize', handleResize);
 
     return () => {
-      clearTimeout(startDelay);
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
       window.removeEventListener('resize', handleResize);
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-0 animate-fadeIn" style={{ animationDelay: '1.5s', animationFillMode: 'forwards' }} />;
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-0 animate-fadeIn" style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }} />;
 });
 
 export default function HeroSection() {
