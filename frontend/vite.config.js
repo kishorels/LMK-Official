@@ -8,7 +8,7 @@ export default defineConfig({
     plugins: [
         react(),
         sitemap({
-            hostname: 'https://www.lmksofttech.in',
+            hostname: 'https://lmksofttech.in',
             dynamicRoutes: [
                 '/',
                 '/services',
