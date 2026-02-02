@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback, memo } from 'react';
 import { Sparkles, Code2, Smartphone, Server } from 'lucide-react';
 
-// Optimized Particles - Reduced count and complexity for better performance
-const Particles = memo(({ id, options }) => {
+// Optimized but fully Interactive Particles
+const Particles = memo(() => {
   const canvasRef = React.useRef(null);
   const animationRef = React.useRef(null);
+  const mouse = React.useRef({ x: null, y: null });
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -12,7 +13,6 @@ const Particles = memo(({ id, options }) => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d', { alpha: true });
 
-    // Use a smaller scale for the canvas to reduce pixel processing
     const dpr = window.devicePixelRatio || 1;
     const updateSize = () => {
       canvas.width = window.innerWidth * dpr;
@@ -22,25 +22,35 @@ const Particles = memo(({ id, options }) => {
     updateSize();
 
     const particles = [];
-    // Restored prominent particle count (balanced for performance)
-    const particleCount = typeof window !== 'undefined' && window.innerWidth < 1024 ? 40 : 80;
+    const particleCount = window.innerWidth < 1024 ? 60 : 150;
 
     class Particle {
-      constructor() {
-        this.reset();
-      }
-
-      reset() {
-        this.x = Math.random() * window.innerWidth;
-        this.y = Math.random() * window.innerHeight;
-        this.vx = (Math.random() - 0.5) * 0.8;
-        this.vy = (Math.random() - 0.5) * 0.8;
-        this.size = Math.random() * 2 + 0.5;
-        const colors = ['#14b8a6', '#6366f1', '#22d3ee'];
+      constructor(x, y) {
+        this.x = x ?? Math.random() * window.innerWidth;
+        this.y = y ?? Math.random() * window.innerHeight;
+        this.vx = (Math.random() - 0.5) * 3; // Original fast speed
+        this.vy = (Math.random() - 0.5) * 3;
+        this.size = Math.random() * 2 + 1;
+        const colors = ['#14b8a6', '#6366f1', '#22d3ee', '#a855f7'];
         this.color = colors[Math.floor(Math.random() * colors.length)];
       }
 
       update() {
+        // Full Interactive Mouse Repulsion
+        if (mouse.current.x !== null) {
+          const dx = this.x - mouse.current.x;
+          const dy = this.y - mouse.current.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          const radius = 180;
+
+          if (distance < radius) {
+            const force = (radius - distance) / radius;
+            const angle = Math.atan2(dy, dx);
+            this.x += Math.cos(angle) * force * 12;
+            this.y += Math.sin(angle) * force * 12;
+          }
+        }
+
         this.x += this.vx;
         this.y += this.vy;
 
@@ -69,10 +79,8 @@ const Particles = memo(({ id, options }) => {
         p1.update();
         p1.draw();
 
-        // Optimized connection logic - only draw lines for nearby particles
-        // Limit to 20 connections per frame to prevent TBT issues
         let connections = 0;
-        for (let j = i + 1; j < particles.length && connections < 8; j++) {
+        for (let j = i + 1; j < particles.length && connections < 10; j++) {
           const p2 = particles[j];
           const dx = p1.x - p2.x;
           const dy = p1.y - p2.y;
@@ -94,22 +102,40 @@ const Particles = memo(({ id, options }) => {
       animationRef.current = requestAnimationFrame(animate);
     };
 
-    // Immediate start for better user perception
     animate();
 
-    const handleResize = () => {
-      updateSize();
+    const handleMouseMove = (e) => {
+      mouse.current.x = e.clientX;
+      mouse.current.y = e.clientY;
     };
 
-    window.addEventListener('resize', handleResize);
+    const handleMouseLeave = () => {
+      mouse.current.x = null;
+      mouse.current.y = null;
+    };
+
+    const handleClick = (e) => {
+      for (let i = 0; i < 5; i++) {
+        particles.push(new Particle(e.clientX, e.clientY));
+        if (particles.length > 250) particles.shift();
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseleave', handleMouseLeave);
+    window.addEventListener('click', handleClick);
+    window.addEventListener('resize', updateSize);
 
     return () => {
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('click', handleClick);
+      window.removeEventListener('resize', updateSize);
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-0 animate-fadeIn" style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }} />;
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-0 animate-fadeIn" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }} />;
 });
 
 export default function HeroSection() {
@@ -121,10 +147,10 @@ export default function HeroSection() {
 
   return (
     <section id="home" className="relative min-h-screen overflow-hidden bg-[#020617]">
-      {/* Simplified Background to reduce paint complexity and LCP */}
+      {/* Background Effects */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-teal-500/10 blur-[120px]" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-500/10 blur-[120px]" />
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-teal-500/10 blur-[130px]" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-indigo-500/10 blur-[130px]" />
         <Particles />
       </div>
 
@@ -132,7 +158,7 @@ export default function HeroSection() {
       <div className="relative z-10 w-full min-h-screen px-4 sm:px-6 lg:px-12 py-20 flex flex-col justify-center">
         <div className="max-w-7xl mx-auto w-full flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
 
-          {/* Left Column - Hero Text (Instantly visible for LCP) */}
+          {/* Left Column - Hero Text */}
           <div className="flex-1 text-center lg:text-left">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 mb-6">
               <Sparkles className="w-4 h-4 text-teal-400" />
@@ -166,7 +192,7 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Right Column - Service Cards (Slightly delayed to prioritize text) */}
+          {/* Right Column - Service Cards */}
           <div className="flex-1 max-w-md w-full grid gap-4 opacity-0 animate-[fadeIn_0.5s_ease-out_0.2s_forwards]">
             {services.map((service, index) => (
               <div
