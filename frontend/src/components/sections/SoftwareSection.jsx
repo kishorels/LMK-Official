@@ -20,7 +20,7 @@ const codeBlocks = [
 export const SoftwareSection = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: false, margin: '-20%' });
-  
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start end', 'end start'],
@@ -37,7 +37,7 @@ export const SoftwareSection = () => {
     >
       {/* Background Gradient */}
       <div className="absolute inset-0 pointer-events-none">
-        <div 
+        <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-10"
           style={{ background: 'radial-gradient(circle, hsl(35 92% 55%) 0%, transparent 70%)', filter: 'blur(100px)' }}
         />
@@ -55,18 +55,18 @@ export const SoftwareSection = () => {
               <Server className="w-3.5 h-3.5 mr-2" />
               Software Development
             </Badge>
-            
+
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold leading-tight">
               <span className="text-foreground">Enterprise </span>
               <span className="text-gradient-primary">Software</span>
               <br />
               <span className="text-foreground">Solutions</span>
             </h2>
-            
+
             <p className="mt-6 text-muted-foreground text-base leading-relaxed">
-              We architect and build robust software systems that power businesses. 
-              From custom CRM solutions to complex enterprise applications, 
-              our software is built for scalability, security, and performance.
+              We architect and build robust software systems for businesses in Nagercoil, Kanyakumari, and beyond.
+              From custom CRM solutions to complex enterprise applications, our software is
+              optimized for high performance and local business needs.
             </p>
 
             {/* Features Grid */}
@@ -149,7 +149,7 @@ export const SoftwareSection = () => {
                     </div>
                   ))}
                 </div>
-                
+
                 {/* Server Icon */}
                 <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
                   <Cpu className="w-10 h-10 text-accent/60" />

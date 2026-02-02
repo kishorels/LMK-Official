@@ -172,9 +172,9 @@ export const AppSection = () => {
             </h2>
 
             <p className="mt-6 text-muted-foreground text-base leading-relaxed">
-              From iOS to Android, we develop high-performance mobile applications
-              that deliver seamless user experiences. Our apps are built with the
-              latest technologies ensuring speed, security, and scalability.
+              We are the top-rated mobile app development company in Nagercoil and Kanyakumari.
+              From iOS to Android, we develop high-performance applications that deliver seamless
+              user experiences with latest technologies ensuring speed and security.
             </p>
 
             {/* Features */}

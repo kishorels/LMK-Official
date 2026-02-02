@@ -13,6 +13,8 @@ const AboutPage = React.lazy(() => import('./pages/AboutPage'));
 const ServicesPage = React.lazy(() => import('./pages/ServicesPage'));
 const PortfolioPage = React.lazy(() => import('./pages/PortfolioPage'));
 const ContactPage = React.lazy(() => import('./pages/ContactPage'));
+const BlogPage = React.lazy(() => import('./pages/BlogPage'));
+const BlogPostPage = React.lazy(() => import('./pages/BlogPostPage'));
 
 // Fallback Loading Component
 const PageLoader = () => (
@@ -42,6 +44,8 @@ function App() {
               <Route path="/services" element={<ServicesPage />} />
               <Route path="/portfolio" element={<PortfolioPage />} />
               <Route path="/contact" element={<ContactPage />} />
+              <Route path="/blog" element={<BlogPage />} />
+              <Route path="/blog/:slug" element={<BlogPostPage />} />
             </Routes>
           </React.Suspense>
         </main>

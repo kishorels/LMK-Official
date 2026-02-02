@@ -63,8 +63,8 @@ export const WebsiteSection = () => {
 
             <p className="mt-6 text-muted-foreground text-base leading-relaxed">
               We create responsive, fast-loading websites that not only look beautiful
-              but also drive results. From corporate websites to e-commerce platforms,
-              we deliver digital experiences that captivate your audience.
+              but also drive results. As the leading web development company in Nagercoil, Kanyakumari,
+              we deliver digital experiences that captivate your audience and grow your business.
             </p>
 
             {/* Features */}

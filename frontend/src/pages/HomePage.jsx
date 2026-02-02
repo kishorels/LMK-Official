@@ -5,8 +5,10 @@ import {
     Zap, Shield, Clock, Users, Star, ArrowRight,
     CheckCircle2, Rocket, Headphones, Award
 } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 import HeroSection from '../components/sections/HeroSection';
 import { ServicesSection } from '../components/sections/ServicesSection';
+import { BlogSection } from '../components/sections/BlogSection';
 import { Button } from '../components/ui/button';
 
 // Why Choose Us Section
@@ -282,10 +284,17 @@ const FeaturedProjects = () => {
 const HomePage = () => {
     return (
         <>
+            <Helmet>
+                <title>LMK SoftTech | Best Software & Web Development in Nagercoil, Kanyakumari</title>
+                <meta name="description" content="LMK SoftTech is the #1 software company in Nagercoil, Kanyakumari. Specialized in Custom Software, Web & Mobile App Development with 100% client satisfaction." />
+                <meta name="keywords" content="software company Nagercoil, web development Kanyakumari, mobile app developers Nagercoil, best IT company Kanyakumari, Kishore L M, LMK SoftTech, digital excellence, custom software India" />
+                <link rel="canonical" href="https://www.lmksofttech.in/" />
+            </Helmet>
             <HeroSection />
             <ServicesSection />
             <WhyChooseUs />
             <FeaturedProjects />
+            <BlogSection />
             <TestimonialsSection />
             <CTASection />
         </>

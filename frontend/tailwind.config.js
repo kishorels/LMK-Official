@@ -71,7 +71,75 @@ export default {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: 'none',
+            color: '#334155',
+            lineHeight: '1.8',
+            p: {
+              marginTop: '1.25em',
+              marginBottom: '1.25em',
+            },
+            h2: {
+              fontFamily: 'Space Grotesk, system-ui, sans-serif',
+              fontWeight: '700',
+              marginTop: '2em',
+              marginBottom: '1em',
+              color: '#0f172a',
+              borderBottom: '1px solid #e2e8f0',
+              paddingBottom: '0.5em',
+            },
+            h3: {
+              fontFamily: 'Space Grotesk, system-ui, sans-serif',
+              fontWeight: '600',
+              marginTop: '1.5em',
+              marginBottom: '0.75em',
+              color: '#1e293b',
+            },
+            a: {
+              color: '#0d9488',
+              textDecoration: 'none',
+              fontWeight: '500',
+              '&:hover': {
+                color: '#0f766e',
+                textDecoration: 'underline',
+              },
+            },
+            strong: {
+              color: '#0f172a',
+              fontWeight: '600',
+            },
+            ul: {
+              marginTop: '1em',
+              marginBottom: '1em',
+            },
+            li: {
+              marginTop: '0.5em',
+              marginBottom: '0.5em',
+            },
+            table: {
+              width: '100%',
+              borderCollapse: 'collapse',
+              marginTop: '1.5em',
+              marginBottom: '1.5em',
+            },
+            'thead th': {
+              backgroundColor: '#f1f5f9',
+              padding: '0.75rem',
+              textAlign: 'left',
+              fontWeight: '600',
+            },
+            'tbody td': {
+              padding: '0.75rem',
+              borderBottom: '1px solid #e2e8f0',
+            },
+          },
+        },
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 };
