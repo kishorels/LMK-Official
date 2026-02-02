@@ -25,9 +25,9 @@ function App() {
   return (
     <BrowserRouter>
       <Helmet>
-        <title>LMK SoftTech | Digital Excellence</title>
-        <meta name="description" content="Custom software development, web & mobile applications by LMK SoftTech. Transform your business with modern technology." />
-        <meta name="keywords" content="software development, web development, mobile apps, UI/UX, React, LMK SoftTech" />
+        <title>LMK SoftTech | Best Software & Web Development in Nagercoil, Kanyakumari</title>
+        <meta name="description" content="Leading software development company in Nagercoil & Kanyakumari. We build custom websites, mobile apps, and enterprise software. Professional tech solutions in Tamil Nadu." />
+        <meta name="keywords" content="software company Nagercoil, web development Kanyakumari, mobile app developers Nagercoil, best IT company Kanyakumari, Kishore L M, LMK SoftTech" />
       </Helmet>
       <div className="relative min-h-screen bg-background text-foreground">
         {/* Navigation */}
