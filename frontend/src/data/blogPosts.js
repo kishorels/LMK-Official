@@ -521,7 +521,7 @@ export const blogPosts = [
         id: 5,
         title: "How to Choose the Best Web Developer in Kanyakumari | 10 Critical Questions to Ask Before Hiring",
         excerpt: "Hiring a web developer in Nagercoil? Don't make costly mistakes! Learn exactly what questions to ask, red flags to avoid, and how to evaluate web development proposals for your business.",
-        author: "Vishakith",
+        author: "Vishakitha",
         date: "Jan 20, 2026",
         category: "Business Tips",
         image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?crop=entropy&cs=srgb&fm=webp&w=800&q=75",
