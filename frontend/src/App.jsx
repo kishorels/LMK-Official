@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'sonner';
+import { Helmet } from 'react-helmet-async';
 
 // Layout Components
 import { Navigation } from './components/layout/Navigation';
@@ -23,6 +24,11 @@ const PageLoader = () => (
 function App() {
   return (
     <BrowserRouter>
+      <Helmet>
+        <title>LMK SoftTech | Digital Excellence</title>
+        <meta name="description" content="Custom software development, web & mobile applications by LMK SoftTech. Transform your business with modern technology." />
+        <meta name="keywords" content="software development, web development, mobile apps, UI/UX, React, LMK SoftTech" />
+      </Helmet>
       <div className="relative min-h-screen bg-background text-foreground">
         {/* Navigation */}
         <Navigation />

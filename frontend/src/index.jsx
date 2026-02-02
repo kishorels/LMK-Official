@@ -1,18 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { HelmetProvider } from "react-helmet-async";
 import posthog from 'posthog-js';
 import "./index.css";
 import App from "./App";
 
 // Initialize PostHog
-if (process.env.NODE_ENV === 'production') {
+if (import.meta.env.MODE === 'production') {
   const initPostHog = () => {
     posthog.init('phc_yJW1VjHGGwmCbbrtczfqqNxgBDbhlhOWcdzcIJEOTFE', {
       api_host: 'https://us.i.posthog.com',
       person_profiles: 'identified_only',
       capture_performance: true,
       persistence: 'localStorage',
-      autocapture: false, // Disable autocapture if not strictly needed for performance
+      autocapture: false,
     });
   };
 
@@ -26,6 +27,8 @@ if (process.env.NODE_ENV === 'production') {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <HelmetProvider>
+      <App />
+    </HelmetProvider>
   </React.StrictMode>,
 );
