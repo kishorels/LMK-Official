@@ -278,7 +278,7 @@ export default function HeroSection() {
         <div className="flex-1 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 py-8">
           {/* Left Column - Hero Text */}
           <div className="flex-1 max-w-2xl text-center lg:text-left">
-            <div className="mb-6 opacity-0 animate-fadeIn" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
+            <div className="mb-6">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight text-white mb-2">
                 Hi, I'm <br />
                 <span
@@ -289,13 +289,13 @@ export default function HeroSection() {
               </h1>
             </div>
 
-            <div className="mb-8 opacity-0 animate-fadeIn" style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}>
+            <div className="mb-8">
               <p className="text-base sm:text-lg md:text-xl text-slate-200 leading-relaxed">
                 I build <span className="font-semibold text-white">Websites</span>, <span className="font-semibold text-white">Apps</span> & <span className="font-semibold text-white">Software</span>.
               </p>
             </div>
 
-            <div className="mb-8 opacity-0 animate-fadeIn" style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}>
+            <div className="mb-8">
               <button
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                 className="group relative px-8 py-3.5 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold text-base transition-all duration-300 hover:scale-105 active:scale-100 overflow-hidden"
