@@ -21,7 +21,8 @@
     "react-helmet-async": "^2.0.5",
     "react-router-dom": "^7.0.0",
     "sonner": "^1.7.0",
-    "tailwind-merge": "^2.5.5"
+    "tailwind-merge": "^2.5.5",
+    "nodemailer": "^6.9.16"
   },
   "scripts": {
     "dev": "vite",

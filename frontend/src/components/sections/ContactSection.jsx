@@ -6,7 +6,6 @@ import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
 import { Card, CardContent } from '../ui/card';
-import emailjs from '@emailjs/browser';
 
 const contactInfo = [
   { icon: Mail, label: 'Email', value: 'kishorepa64@gmail.com', href: 'mailto:kishorepa64@gmail.com', color: 'text-primary' },
@@ -38,21 +37,19 @@ export const ContactSection = () => {
     setIsSubmitting(true);
 
     try {
-      // Send email using EmailJS
-      const templateParams = {
-        from_name: formState.name,
-        from_email: formState.email,
-        subject: formState.subject,
-        message: formState.message,
-        to_email: 'kishorepa64@gmail.com',
-      };
+      const response = await fetch('/.netlify/functions/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formState),
+      });
 
-      await emailjs.send(
-        'service_4zmo67o',
-        'template_qkacdr4',
-        templateParams,
-        '2qvtGHXpgNJABVWcG'
-      );
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to send email');
+      }
 
       setIsSubmitting(false);
       setIsSubmitted(true);
@@ -63,7 +60,7 @@ export const ContactSection = () => {
     } catch (error) {
       console.error('Error sending email:', error);
       setIsSubmitting(false);
-      alert('Failed to send message. Please configure EmailJS or email directly at kishorepa64@gmail.com');
+      alert('Failed to send message. Please try again later or email directly at kishorepa64@gmail.com');
     }
   };
 
@@ -100,7 +97,7 @@ export const ContactSection = () => {
             <span className="text-gradient-primary">Amazing Together</span>
           </h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            Have a project in mind? We'd love to hear about it. Drop us a message 
+            Have a project in mind? We'd love to hear about it. Drop us a message
             and let's start a conversation about your digital future.
           </p>
         </motion.div>
@@ -118,7 +115,7 @@ export const ContactSection = () => {
                 Contact Information
               </h3>
               <p className="text-muted-foreground">
-                Ready to start your project? Contact us through any of the following 
+                Ready to start your project? Contact us through any of the following
                 channels and we'll get back to you within 24 hours.
               </p>
             </div>

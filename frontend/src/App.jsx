@@ -15,6 +15,7 @@ const PortfolioPage = React.lazy(() => import('./pages/PortfolioPage'));
 const ContactPage = React.lazy(() => import('./pages/ContactPage'));
 const BlogPage = React.lazy(() => import('./pages/BlogPage'));
 const BlogPostPage = React.lazy(() => import('./pages/BlogPostPage'));
+const NagercoilPage = React.lazy(() => import('./pages/NagercoilPage'));
 
 // Fallback Loading Component
 const PageLoader = () => (
@@ -46,6 +47,8 @@ function App() {
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/blog" element={<BlogPage />} />
               <Route path="/blog/:slug" element={<BlogPostPage />} />
+              <Route path="/nagercoil" element={<NagercoilPage />} />
+              <Route path="/software-company-nagercoil" element={<NagercoilPage />} />
             </Routes>
           </React.Suspense>
         </main>

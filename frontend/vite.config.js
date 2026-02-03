@@ -8,13 +8,16 @@ export default defineConfig({
     plugins: [
         react(),
         sitemap({
-            hostname: 'https://lmksofttech.in',
+            hostname: 'https://www.lmksofttech.in',
             dynamicRoutes: [
                 '/',
                 '/services',
                 '/portfolio',
                 '/about',
-                '/contact'
+                '/contact',
+                '/blog',
+                '/nagercoil',
+                '/software-company-nagercoil'
             ]
         })
     ],

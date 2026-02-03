@@ -1,14 +1,19 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Github, Linkedin, Twitter } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const LOGO_URL = '/lmk-logo.webp';
 
 const footerLinks = {
   services: [
-    { label: 'Website Development', href: '#services' },
-    { label: 'App Development', href: '#services' },
-    { label: 'Software Development', href: '#services' },
+    { label: 'Website Development', href: '/services' },
+    { label: 'App Development', href: '/services' },
+    { label: 'Software Development', href: '/services' },
+  ],
+  locations: [
+    { label: 'Software Company in Nagercoil', href: '/nagercoil' },
+    { label: 'Web Development Nagercoil', href: '/software-company-nagercoil' },
   ],
 };
 
@@ -57,13 +62,31 @@ export const Footer = () => {
             <ul className="space-y-4">
               {footerLinks.services.map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-primary/40" />
                     {link.label}
-                  </a>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Locations/SEO Section */}
+          <div>
+            <h4 className="font-display font-semibold text-foreground mb-6 uppercase tracking-wider text-sm">Popular Searches</h4>
+            <ul className="space-y-4">
+              {footerLinks.locations.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    to={link.href}
+                    className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-secondary/40" />
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
