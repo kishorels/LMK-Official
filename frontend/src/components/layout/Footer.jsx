@@ -74,26 +74,8 @@ export const Footer = () => {
             </ul>
           </div>
 
-          {/* Locations/SEO Section */}
-          <div>
-            <h4 className="font-display font-semibold text-foreground mb-6 uppercase tracking-wider text-sm">Popular Searches</h4>
-            <ul className="space-y-4">
-              {footerLinks.locations.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    to={link.href}
-                    className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-secondary/40" />
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
           {/* Contact Details Section */}
-          <div>
+          <div className="lg:col-span-1">
             <h4 className="font-display font-semibold text-foreground mb-6 uppercase tracking-wider text-sm">Contact Us</h4>
             <div className="space-y-4">
               <a
@@ -121,6 +103,13 @@ export const Footer = () => {
                 Nagercoil, Tamil Nadu, India
               </div>
             </div>
+          </div>
+
+          {/* Hidden SEO Links (for indexing only) */}
+          <div className="sr-only">
+            {footerLinks.locations.map((link) => (
+              <Link key={link.label} to={link.href}>{link.label}</Link>
+            ))}
           </div>
         </div>
 
