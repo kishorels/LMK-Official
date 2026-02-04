@@ -11,10 +11,14 @@ import { Footer } from './components/layout/Footer';
 const HomePage = React.lazy(() => import('./pages/HomePage'));
 const AboutPage = React.lazy(() => import('./pages/AboutPage'));
 const ServicesPage = React.lazy(() => import('./pages/ServicesPage'));
+const WebDevPage = React.lazy(() => import('./pages/WebDevPage'));
+const AppDevPage = React.lazy(() => import('./pages/AppDevPage'));
+const SoftwareDevPage = React.lazy(() => import('./pages/SoftwareDevPage'));
 const PortfolioPage = React.lazy(() => import('./pages/PortfolioPage'));
 const ContactPage = React.lazy(() => import('./pages/ContactPage'));
 const BlogPage = React.lazy(() => import('./pages/BlogPage'));
 const BlogPostPage = React.lazy(() => import('./pages/BlogPostPage'));
+const ProjectDetailPage = React.lazy(() => import('./pages/ProjectDetailPage'));
 const NagercoilPage = React.lazy(() => import('./pages/NagercoilPage'));
 
 // Fallback Loading Component
@@ -43,7 +47,11 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/services" element={<ServicesPage />} />
+              <Route path="/web-development-nagercoil" element={<WebDevPage />} />
+              <Route path="/mobile-app-development-nagercoil" element={<AppDevPage />} />
+              <Route path="/custom-software-development-nagercoil" element={<SoftwareDevPage />} />
               <Route path="/portfolio" element={<PortfolioPage />} />
+              <Route path="/portfolio/:slug" element={<ProjectDetailPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/blog" element={<BlogPage />} />
               <Route path="/blog/:slug" element={<BlogPostPage />} />

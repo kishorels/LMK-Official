@@ -195,13 +195,14 @@ const BlogPostPage = () => {
                             initial={{ opacity: 0, scale: 0.98 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.5, delay: 0.1 }}
-                            className="aspect-video w-full overflow-hidden rounded-2xl shadow-xl mb-12"
+                            className="aspect-video w-full overflow-hidden rounded-2xl shadow-xl mb-12 bg-slate-200"
                         >
                             <img
                                 src={post.image}
                                 alt={post.title}
                                 className="w-full h-full object-cover"
                                 loading="eager"
+                                decoding="async"
                             />
                         </motion.div>
 
@@ -323,11 +324,15 @@ const BlogPostPage = () => {
                                                 className="group block"
                                             >
                                                 <div className="flex gap-4">
-                                                    <img
-                                                        src={relatedPost.image}
-                                                        alt={relatedPost.title}
-                                                        className="w-20 h-14 object-cover rounded-lg flex-shrink-0"
-                                                    />
+                                                    <div className="w-20 h-14 bg-slate-100 rounded-lg flex-shrink-0 overflow-hidden">
+                                                        <img
+                                                            src={relatedPost.image}
+                                                            alt={relatedPost.title}
+                                                            className="w-full h-full object-cover"
+                                                            loading="lazy"
+                                                            decoding="async"
+                                                        />
+                                                    </div>
                                                     <div>
                                                         <h4 className="text-sm font-semibold text-slate-900 group-hover:text-teal-600 transition-colors line-clamp-2 leading-snug">
                                                             {relatedPost.title}

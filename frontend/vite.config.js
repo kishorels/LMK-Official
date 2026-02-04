@@ -3,6 +3,9 @@ import react from '@vitejs/plugin-react';
 import sitemap from 'vite-plugin-sitemap';
 import path from 'path';
 
+import { blogPosts } from './src/data/blogPosts.js';
+import { projects } from './src/data/projects.js';
+
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [
@@ -12,12 +15,17 @@ export default defineConfig({
             dynamicRoutes: [
                 '/',
                 '/services',
+                '/web-development-nagercoil',
+                '/mobile-app-development-nagercoil',
+                '/custom-software-development-nagercoil',
                 '/portfolio',
                 '/about',
                 '/contact',
                 '/blog',
                 '/nagercoil',
-                '/software-company-nagercoil'
+                '/software-company-nagercoil',
+                ...blogPosts.map(post => `/blog/${post.slug}`),
+                ...projects.map(project => `/portfolio/${project.slug}`)
             ]
         })
     ],

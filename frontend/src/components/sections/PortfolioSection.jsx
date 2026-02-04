@@ -4,45 +4,10 @@ import {
   FolderOpen, ExternalLink, Globe, Smartphone, Server, X,
   ArrowRight, Star, Layers, Sparkles
 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { projects } from '../../data/projects';
 import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
-
-const projects = [
-  {
-    id: 1,
-    title: 'E-commerce Site',
-    category: 'Website',
-    description: 'A modern e-commerce platform showcasing physical products and food items with cart, checkout-ready architecture, category browsing, and responsive design. Built for selling goods and F&B, not service listings.',
-    image: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?crop=entropy&cs=srgb&fm=webp&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwxfHxzaG9wcGluZyUyMG9ubGluZXxlbnwwfHx8fDE3MzgyNDU2MDB8MA&ixlib=rb-4.1.0&q=75&w=600',
-    icon: Globe,
-    gradient: 'from-teal-500 to-emerald-500',
-    bgGradient: 'from-teal-500/20 via-emerald-500/10 to-transparent',
-    featured: true,
-  },
-  {
-    id: 2,
-    title: 'MedCode App',
-    category: 'Mobile App',
-    description: ' MedBook is a comprehensive healthcare platform featuring role-based access for patients, doctors, and hospitals, offering appointment booking, AI-powered health assistance, and medical record management.',
-    image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?crop=entropy&cs=srgb&fm=webp&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwxfHxkb2N0b3IlMjBhcHBvaW50bWVudHxlbnwwfHx8fDE3MzgyNDU2MDB8MA&ixlib=rb-4.1.0&q=75&w=600',
-    icon: Smartphone,
-    gradient: 'from-indigo-500 to-purple-500',
-    bgGradient: 'from-indigo-500/20 via-purple-500/10 to-transparent',
-    featured: true,
-  },
-  {
-    id: 3,
-    title: 'Chruch Presentation Software',
-    category: 'Software',
-    description: 'A comprehensive church presentation software developed for Kumar Pastor, designed to display song lyrics, Bible verses, announcements, and multimedia content during worship services. Features real-time text synchronization, customizable themes, and seamless multimedia integration for an enhanced worship experience.',
-    image: 'https://images.unsplash.com/photo-1438232992991-995b7058bbb3?crop=entropy&cs=srgb&fm=webp&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwxfHxjaHVyY2glMjB3b3JzaGlwfGVufDB8fHx8MTczODI0NTYwMHww&ixlib=rb-4.1.0&q=75&w=600',
-    icon: Server,
-    gradient: 'from-pink-500 to-rose-500',
-    bgGradient: 'from-pink-500/20 via-rose-500/10 to-transparent',
-    url: 'https://drive.google.com/drive/folders/112EpRXfDObD8_eM-3Y3fRYBdY_lMPkf4?usp=sharing',
-    featured: true,
-  },
-];
 
 const categories = [
   { name: 'All', icon: Layers },
@@ -52,81 +17,87 @@ const categories = [
 ];
 
 // Premium Project Card
-const ProjectCard = ({ project, index, onClick }) => (
-  <motion.div
-    layout
-    initial={{ opacity: 0, y: 40, scale: 0.95 }}
-    animate={{ opacity: 1, y: 0, scale: 1 }}
-    exit={{ opacity: 0, scale: 0.9 }}
-    transition={{ duration: 0.5, delay: index * 0.1 }}
-    className="group relative cursor-pointer"
-    onClick={onClick}
-  >
-    {/* Outer glow on hover */}
-    <div className={`absolute -inset-2 bg-gradient-to-r ${project.gradient} rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-700`} />
+const ProjectCard = ({ project, index }) => {
+  const navigate = useNavigate();
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: 40, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="group relative cursor-pointer"
+      onClick={() => navigate(`/portfolio/${project.slug}`)}
+    >
+      {/* Outer glow on hover */}
+      <div className={`absolute -inset-2 bg-gradient-to-r ${project.gradient} rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-700`} />
 
-    <div className="relative bg-white rounded-2xl overflow-hidden border border-slate-100 hover:border-slate-200 transition-all duration-500">
-      {/* Image Container */}
-      <div className="relative aspect-[4/3] overflow-hidden">
-        <motion.img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-full object-cover"
-          width="600"
-          height="450"
-          loading="lazy"
-          whileHover={{ scale: 1.08 }}
-          transition={{ duration: 0.6 }}
-        />
+      <div className="relative bg-white rounded-2xl overflow-hidden border border-slate-100 hover:border-slate-200 transition-all duration-500">
+        {/* Image Container */}
+        <div className="relative aspect-[4/3] overflow-hidden">
+          <div className="w-full h-full bg-slate-100">
+            <motion.img
+              src={project.image}
+              alt={project.title}
+              className="w-full h-full object-cover"
+              width="600"
+              height="450"
+              loading="lazy"
+              decoding="async"
+              whileHover={{ scale: 1.08 }}
+              transition={{ duration: 0.6 }}
+            />
+          </div>
 
-        {/* Gradient overlay */}
-        <div className={`absolute inset-0 bg-gradient-to-t ${project.bgGradient} from-white via-transparent to-transparent`} />
+          {/* Gradient overlay */}
+          <div className={`absolute inset-0 bg-gradient-to-t ${project.bgGradient} from-white via-transparent to-transparent`} />
 
-        {/* Featured badge */}
-        {project.featured && (
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-semibold text-slate-700"
-          >
-            <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-            Featured
-          </motion.div>
-        )}
+          {/* Featured badge */}
+          {project.featured && (
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-semibold text-slate-700"
+            >
+              <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+              Featured
+            </motion.div>
+          )}
 
-        {/* Category badge */}
-        <div className="absolute top-4 left-4">
-          <div className={`flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r ${project.gradient} rounded-full text-white text-xs font-semibold`}>
-            <project.icon className="w-3.5 h-3.5" />
-            {project.category}
+          {/* Category badge */}
+          <div className="absolute top-4 left-4">
+            <div className={`flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r ${project.gradient} rounded-full text-white text-xs font-semibold`}>
+              <project.icon className="w-3.5 h-3.5" />
+              {project.category}
+            </div>
+          </div>
+
+          {/* Hover overlay with view button */}
+          <div className="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+            <motion.div
+              initial={{ scale: 0, rotate: -180 }}
+              whileHover={{ scale: 1.1 }}
+              animate={{ scale: 1, rotate: 0 }}
+              className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${project.gradient} flex items-center justify-center`}
+            >
+              <ExternalLink className="w-7 h-7 text-white" />
+            </motion.div>
           </div>
         </div>
 
-        {/* Hover overlay with view button */}
-        <div className="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
-          <motion.div
-            initial={{ scale: 0, rotate: -180 }}
-            whileHover={{ scale: 1.1 }}
-            animate={{ scale: 1, rotate: 0 }}
-            className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${project.gradient} flex items-center justify-center`}
-          >
-            <ExternalLink className="w-7 h-7 text-white" />
-          </motion.div>
+        {/* Content */}
+        <div className="p-6">
+          <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-teal-600 transition-colors">
+            {project.title}
+          </h3>
+          <p className="text-slate-600 text-sm line-clamp-2">
+            {project.description}
+          </p>
         </div>
       </div>
-
-      {/* Content */}
-      <div className="p-6">
-        <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-teal-600 transition-colors">
-          {project.title}
-        </h3>
-        <p className="text-slate-600 text-sm line-clamp-2">
-          {project.description}
-        </p>
-      </div>
-    </div>
-  </motion.div>
-);
+    </motion.div>
+  );
+};
 
 // Premium Modal
 const ProjectModal = ({ project, onClose }) => (
@@ -166,14 +137,17 @@ const ProjectModal = ({ project, onClose }) => (
 
       {/* Image */}
       <div className="relative aspect-video">
-        <img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-full object-cover"
-          width="1200"
-          height="675"
-          loading="lazy"
-        />
+        <div className="w-full h-full bg-slate-100">
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover"
+            width="1200"
+            height="675"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
         <div className={`absolute inset-0 bg-gradient-to-t ${project.bgGradient} from-white via-white/50 to-transparent`} />
 
         {/* Category floating badge */}

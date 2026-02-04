@@ -78,12 +78,15 @@ const BlogPage = () => {
                             >
                                 {/* Image Container */}
                                 <Link to={`/blog/${post.slug}`} className="block relative aspect-[16/10] overflow-hidden">
-                                    <img
-                                        src={post.image}
-                                        alt={post.title}
-                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                                        loading="lazy"
-                                    />
+                                    <div className="w-full h-full bg-slate-200">
+                                        <img
+                                            src={post.image}
+                                            alt={post.title}
+                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                            loading="lazy"
+                                            decoding="async"
+                                        />
+                                    </div>
                                     <div className="absolute top-4 left-4 flex gap-2">
                                         <span className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-xs font-bold text-teal-600 shadow-sm">
                                             {post.category}

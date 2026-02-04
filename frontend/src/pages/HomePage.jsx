@@ -10,6 +10,8 @@ import HeroSection from '../components/sections/HeroSection';
 import { ServicesSection } from '../components/sections/ServicesSection';
 import { BlogSection } from '../components/sections/BlogSection';
 import { Button } from '../components/ui/button';
+import { projects } from '../data/projects';
+import { blogPosts } from '../data/blogPosts';
 
 // Why Choose Us Section
 const WhyChooseUs = () => {
@@ -206,23 +208,7 @@ const CTASection = () => {
 
 // Featured Projects Preview
 const FeaturedProjects = () => {
-    const projects = [
-        {
-            title: 'E-Commerce Platform',
-            category: 'Web Development',
-            image: 'https://images.unsplash.com/photo-1557324232-b8917d3c3dcb?crop=entropy&cs=srgb&fm=webp&w=600&q=75'
-        },
-        {
-            title: 'Food Delivery App',
-            category: 'Mobile App',
-            image: 'https://images.unsplash.com/photo-1633250391894-397930e3f5f2?crop=entropy&cs=srgb&fm=webp&w=600&q=75'
-        },
-        {
-            title: 'Medical Consultation App',
-            category: 'Software',
-            image: 'https://images.unsplash.com/photo-1568952433726-3896e3881c65?crop=entropy&cs=srgb&fm=webp&w=600&q=75'
-        },
-    ];
+    const featuredProjects = projects.filter(p => p.featured).slice(0, 3);
 
     return (
         <section className="py-24 bg-slate-50">
@@ -248,8 +234,8 @@ const FeaturedProjects = () => {
                 </motion.div>
 
                 <div className="grid md:grid-cols-3 gap-8">
-                    {projects.map((project, index) => (
-                        <Link to="/portfolio" key={project.title}>
+                    {featuredProjects.map((project, index) => (
+                        <Link to={`/portfolio/${project.slug}`} key={project.title}>
                             <motion.div
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
@@ -257,11 +243,13 @@ const FeaturedProjects = () => {
                                 transition={{ delay: index * 0.15 }}
                                 className="group relative overflow-hidden rounded-2xl bg-white border border-slate-100 hover:border-slate-200 transition-all duration-300"
                             >
-                                <div className="aspect-[4/3] relative overflow-hidden">
+                                <div className="aspect-[4/3] relative overflow-hidden bg-slate-100">
                                     <img
                                         src={project.image}
                                         alt={project.title}
                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                        loading="lazy"
+                                        decoding="async"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                                 </div>
