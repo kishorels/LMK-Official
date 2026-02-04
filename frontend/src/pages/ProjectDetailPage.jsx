@@ -20,7 +20,7 @@ const ProjectDetailPage = () => {
             <div className="min-h-screen py-32 flex flex-col items-center justify-center text-center px-4">
                 <h1 className="text-4xl font-bold mb-4">Project Not Found</h1>
                 <p className="mb-8 text-slate-500">The project you are looking for does not exist or has been moved.</p>
-                <Button onClick={() => navigate('/portfolio')} variant="outline">Back to Portfolio</Button>
+                <Button onClick={() => navigate('/products')} variant="outline">Back to Products</Button>
             </div>
         );
     }
@@ -31,12 +31,12 @@ const ProjectDetailPage = () => {
                 <title>{project.title} | LMK SoftTech Project</title>
                 <meta name="description" content={project.description} />
                 <meta name="keywords" content={project.keywords ? project.keywords.join(', ') : project.category} />
-                <link rel="canonical" href={`https://www.lmksofttech.in/portfolio/${project.slug}`} />
+                <link rel="canonical" href={`https://www.lmksofttech.in/products/${project.slug}`} />
             </Helmet>
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Back Button */}
-                <Link to="/portfolio" className="inline-flex items-center gap-2 text-slate-500 hover:text-teal-600 transition-colors mb-8 group">
+                <Link to="/products" className="inline-flex items-center gap-2 text-slate-500 hover:text-teal-600 transition-colors mb-8 group">
                     <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                     Back to All Products
                 </Link>

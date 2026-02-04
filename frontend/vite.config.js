@@ -18,14 +18,14 @@ export default defineConfig({
                 '/web-development-nagercoil',
                 '/mobile-app-development-nagercoil',
                 '/custom-software-development-nagercoil',
-                '/portfolio',
+                '/products',
                 '/about',
                 '/contact',
                 '/blog',
                 '/nagercoil',
                 '/software-company-nagercoil',
                 ...blogPosts.map(post => `/blog/${post.slug}`),
-                ...projects.map(project => `/portfolio/${project.slug}`)
+                ...projects.map(project => `/products/${project.slug}`)
             ]
         })
     ],

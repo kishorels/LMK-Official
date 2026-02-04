@@ -190,7 +190,7 @@ const CTASection = () => {
                                 <ArrowRight className="w-5 h-5 ml-2" />
                             </Button>
                         </Link>
-                        <Link to="/portfolio">
+                        <Link to="/products">
                             <Button
                                 size="lg"
                                 variant="outline"
@@ -227,7 +227,7 @@ const FeaturedProjects = () => {
                             Featured Projects
                         </h2>
                     </div>
-                    <Link to="/portfolio" className="group flex items-center gap-2 text-teal-600 font-semibold hover:text-teal-700 transition-colors">
+                    <Link to="/products" className="group flex items-center gap-2 text-teal-600 font-semibold hover:text-teal-700 transition-colors">
                         View All Projects
                         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </Link>
@@ -235,7 +235,7 @@ const FeaturedProjects = () => {
 
                 <div className="grid md:grid-cols-3 gap-8">
                     {featuredProjects.map((project, index) => (
-                        <Link to={`/portfolio/${project.slug}`} key={project.title}>
+                        <Link to={`/products/${project.slug}`} key={project.title}>
                             <motion.div
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}

@@ -9,7 +9,7 @@ const PortfolioPage = () => {
                 <title>Our Products | LMK SoftTech - Showcase of Our Best Digital Projects</title>
                 <meta name="description" content="Browse through our successful projects including E-commerce platforms, Healthcare apps (Medcode), and presentation software for churches. Proven results in Nagercoil." />
                 <meta name="keywords" content="LMK SoftTech portfolio, software projects Nagercoil, web development examples, mobile app showcase, success stories Kanyakumari" />
-                <link rel="canonical" href="https://www.lmksofttech.in/portfolio" />
+                <link rel="canonical" href="https://www.lmksofttech.in/products" />
             </Helmet>
             <PortfolioSection />
         </div>

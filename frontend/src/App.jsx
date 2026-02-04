@@ -67,8 +67,8 @@ const AppRoutes = () => {
           <Route path="/web-development-nagercoil" element={<PageTransition><WebDevPage /></PageTransition>} />
           <Route path="/mobile-app-development-nagercoil" element={<PageTransition><AppDevPage /></PageTransition>} />
           <Route path="/custom-software-development-nagercoil" element={<PageTransition><SoftwareDevPage /></PageTransition>} />
-          <Route path="/portfolio" element={<PageTransition><PortfolioPage /></PageTransition>} />
-          <Route path="/portfolio/:slug" element={<PageTransition><ProjectDetailPage /></PageTransition>} />
+          <Route path="/products" element={<PageTransition><PortfolioPage /></PageTransition>} />
+          <Route path="/products/:slug" element={<PageTransition><ProjectDetailPage /></PageTransition>} />
           <Route path="/contact" element={<PageTransition><ContactPage /></PageTransition>} />
           <Route path="/blog" element={<PageTransition><BlogPage /></PageTransition>} />
           <Route path="/blog/:slug" element={<PageTransition><BlogPostPage /></PageTransition>} />
