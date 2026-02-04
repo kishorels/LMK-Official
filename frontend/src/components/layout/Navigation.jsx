@@ -30,11 +30,9 @@ export const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on route change
-  useEffect(() => {
+  const handleLinkClick = () => {
     setIsMobileMenuOpen(false);
-    window.scrollTo(0, 0); // Scroll to top on page change
-  }, [location.pathname]);
+  };
 
   const isActive = (href) => {
     if (href === '/') {
@@ -66,7 +64,7 @@ export const Navigation = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Link to="/" className="flex items-center gap-3">
+              <Link to="/" onPointerDown={handleLinkClick} className="flex items-center gap-3">
                 <img
                   src={LOGO_URL}
                   alt="LMK SoftTech"
@@ -83,15 +81,16 @@ export const Navigation = () => {
               {navItems.map((item) => (
                 <motion.div
                   key={item.label}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   <Link
                     to={item.href}
+                    onPointerDown={handleLinkClick} // Trigger faster than click
                     className={cn(
-                      'relative px-4 py-2 text-sm font-medium rounded-full transition-all duration-200',
+                      'relative px-4 py-2 text-sm font-bold rounded-full transition-all duration-150',
                       isActive(item.href)
-                        ? 'bg-white text-slate-900'
+                        ? 'bg-white text-slate-900 shadow-sm'
                         : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
                     )}
                   >
@@ -133,34 +132,38 @@ export const Navigation = () => {
       < AnimatePresence >
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
             className="fixed inset-0 z-40 md:hidden"
           >
-            <div className="absolute inset-0 bg-white">
-              <div className="flex flex-col pt-24 px-6">
-                {navItems.map((item, index) => (
-                  <motion.div
-                    key={item.label}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.05 }}
-                  >
-                    <Link
-                      to={item.href}
-                      className={cn(
-                        "flex items-center justify-between py-4 border-b border-slate-100 text-lg font-medium transition-colors",
-                        isActive(item.href)
-                          ? 'text-teal-600'
-                          : 'text-slate-700 hover:text-teal-600'
-                      )}
+            <div className="absolute inset-0 bg-white/95 backdrop-blur-xl">
+              <div className="flex flex-col pt-24 px-6 h-full">
+                <div className="space-y-1">
+                  {navItems.map((item, index) => (
+                    <motion.div
+                      key={item.label}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.05 }}
                     >
-                      {item.label}
-                      <ChevronRight className="w-5 h-5 text-slate-400" />
-                    </Link>
-                  </motion.div>
-                ))}
+                      <Link
+                        to={item.href}
+                        onClick={handleLinkClick}
+                        className={cn(
+                          "flex items-center justify-between py-4 border-b border-slate-100 text-xl font-bold transition-colors",
+                          isActive(item.href)
+                            ? 'text-teal-600'
+                            : 'text-slate-700 hover:text-teal-600'
+                        )}
+                      >
+                        {item.label}
+                        <ChevronRight className="w-5 h-5 text-slate-300" />
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}

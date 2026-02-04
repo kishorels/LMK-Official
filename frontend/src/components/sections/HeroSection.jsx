@@ -22,7 +22,8 @@ const Particles = memo(() => {
     updateSize();
 
     const particles = [];
-    const particleCount = window.innerWidth < 1024 ? 60 : 150;
+    const isMobile = window.innerWidth < 1024;
+    const particleCount = isMobile ? 30 : 80; // Significantly reduced for faster loading
 
     class Particle {
       constructor(x, y) {
@@ -135,7 +136,7 @@ const Particles = memo(() => {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-0 animate-fadeIn" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }} />;
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-0 animate-fadeIn" style={{ animationDelay: '0.1s', animationFillMode: 'forwards', willChange: 'transform' }} />;
 });
 
 export default function HeroSection() {

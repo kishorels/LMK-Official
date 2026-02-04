@@ -27,7 +27,7 @@ const ProjectCard = ({ project, index }) => {
       exit={{ opacity: 0, scale: 0.9 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="group relative cursor-pointer"
-      onClick={() => navigate(`/portfolio/${project.slug}`)}
+      onPointerDown={() => navigate(`/portfolio/${project.slug}`)}
     >
       {/* Outer glow on hover */}
       <div className={`absolute -inset-2 bg-gradient-to-r ${project.gradient} rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-700`} />
