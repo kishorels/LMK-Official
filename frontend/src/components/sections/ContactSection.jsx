@@ -6,6 +6,7 @@ import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
 import { Card, CardContent } from '../ui/card';
+import emailjs from '@emailjs/browser';
 
 const contactInfo = [
   { icon: Mail, label: 'Email', value: 'kishorepa64@gmail.com', href: 'mailto:kishorepa64@gmail.com', color: 'text-primary' },
@@ -37,19 +38,20 @@ export const ContactSection = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('/.netlify/functions/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formState),
-      });
+      const templateParams = {
+        from_name: formState.name,
+        from_email: formState.email,
+        subject: formState.subject,
+        message: formState.message,
+        to_email: 'kishorepa64@gmail.com',
+      };
 
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.error || 'Failed to send email');
-      }
+      await emailjs.send(
+        'service_4zmo67o',
+        'template_qkacdr4',
+        templateParams,
+        '2qvtGHXpgNJABVWcG'
+      );
 
       setIsSubmitting(false);
       setIsSubmitted(true);
