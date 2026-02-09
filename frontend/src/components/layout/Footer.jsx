@@ -50,7 +50,7 @@ export const Footer = () => {
               />
             </motion.a>
             <p className="mt-4 text-muted-foreground max-w-md">
-              Transforming ideas into digital reality. We create innovative websites,
+              LMK SoftTech is the leading software company in Nagercoil. We create innovative websites,
               mobile apps, and software solutions that drive business growth through
               cutting-edge technology and user-centric design.
             </p>
@@ -71,6 +71,15 @@ export const Footer = () => {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  to="/nagercoil"
+                  className="text-muted-foreground hover:text-primary transition-colors text-sm flex items-center gap-2"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary/40" />
+                  Software Company Nagercoil
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -104,19 +113,12 @@ export const Footer = () => {
               </div>
             </div>
           </div>
-
-          {/* Hidden SEO Links (for indexing only) */}
-          <div className="sr-only">
-            {footerLinks.locations.map((link) => (
-              <Link key={link.label} to={link.href}>{link.label}</Link>
-            ))}
-          </div>
         </div>
 
         {/* Bottom Section */}
         <div className="mt-12 pt-8 border-t border-border/50 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            © {currentYear} LMK SoftTech. All rights reserved. Developed by Kishore L M.
+            © {currentYear} LMK SoftTech - Best Software Company in Nagercoil. All rights reserved.
           </p>
 
           {/* Social Links */}

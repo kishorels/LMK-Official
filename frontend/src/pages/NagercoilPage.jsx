@@ -48,9 +48,9 @@ const NagercoilPage = () => {
     return (
         <div className="pt-20">
             <Helmet>
-                <title>Best Software Company in Nagercoil | Web & App Development - LMK SoftTech</title>
+                <title>LMK - Best Software Company in Nagercoil | Web & App Development</title>
                 <meta name="description" content="LMK SoftTech is the leading software company in Nagercoil, Kanyakumari. We offer custom web development, mobile app development, and software solutions. Get a free quote today!" />
-                <meta name="keywords" content="software company nagercoil, software company in nagercoil, best software company nagercoil, web development nagercoil, mobile app development kanyakumari, IT company nagercoil, software developers nagercoil" />
+                <meta name="keywords" content="LMK, LMK Nagercoil, software company nagercoil, software company in nagercoil, best software company nagercoil, web development nagercoil, mobile app development kanyakumari, IT company nagercoil, software developers nagercoil" />
                 <link rel="canonical" href="https://www.lmksofttech.in/nagercoil" />
 
                 {/* Local Business Schema */}
