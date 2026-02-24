@@ -167,7 +167,7 @@ export default function HeroSection() {
             </div>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] text-white mb-6">
-              LMK SoftTech <br />
+              LMK | LMK SoftTech <br />
               <span className="bg-gradient-to-r from-teal-400 to-indigo-400 bg-clip-text text-transparent text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
                 Software Company in Nagercoil
               </span>
@@ -198,7 +198,7 @@ export default function HeroSection() {
             {services.map((service, index) => (
               <div
                 key={service.label}
-                className="group relative flex items-center gap-4 p-5 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all cursor-pointer"
+                className="group relative flex items-center gap-4 p-5 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all"
               >
                 <div className={`p-3 rounded-xl bg-gradient-to-br ${service.gradient}`}>
                   <service.icon className="w-6 h-6 text-white" />

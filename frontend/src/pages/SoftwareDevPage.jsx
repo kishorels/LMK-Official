@@ -7,9 +7,9 @@ const SoftwareDevPage = () => {
     return (
         <div className="pt-20">
             <Helmet>
-                <title>Custom Software Development in Nagercoil | ERP & CRM - LMK SoftTech</title>
-                <meta name="description" content="Get custom software solutions in Nagercoil. From ERP and CRM systems to specialized business software, LMK SoftTech delivers scalable and secure solutions in Kanyakumari." />
-                <meta name="keywords" content="software development nagercoil, custom software kanyakumari, ERP development tamil nadu, CRM solutions nagercoil" />
+                <title>LMK | Custom Software Development in Nagercoil | ERP & CRM</title>
+                <meta name="description" content="LMK | LMK SoftTech provides custom software solutions in Nagercoil. From ERP and CRM systems to specialized business software, we deliver scalable solutions." />
+                <meta name="keywords" content="LMK, lmk, software development nagercoil, custom software kanyakumari, ERP development tamil nadu, CRM solutions nagercoil" />
                 <link rel="canonical" href="https://www.lmksofttech.in/custom-software-development-nagercoil" />
             </Helmet>
             <SoftwareSection />

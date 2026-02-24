@@ -7,9 +7,9 @@ const WebDevPage = () => {
     return (
         <div className="pt-20">
             <Helmet>
-                <title>Web Development in Nagercoil | Professional Website Design - LMK SoftTech</title>
-                <meta name="description" content="Looking for professional web development in Nagercoil? LMK SoftTech builds high-performance, SEO-optimized, and responsive websites for Kanyakumari businesses." />
-                <meta name="keywords" content="web development nagercoil, website design kanyakumari, best web designers nagercoil, ecommerce website development tamil nadu" />
+                <title>LMK | Web Development in Nagercoil | Professional Website Design</title>
+                <meta name="description" content="Looking for LMK? We provide professional web development in Nagercoil. LMK SoftTech builds high-performance, SEO-optimized, and responsive websites for Kanyakumari businesses." />
+                <meta name="keywords" content="LMK, lmk, web development nagercoil, website design kanyakumari, best web designers nagercoil, ecommerce website development tamil nadu" />
                 <link rel="canonical" href="https://www.lmksofttech.in/web-development-nagercoil" />
             </Helmet>
             <WebsiteSection />

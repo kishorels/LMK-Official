@@ -58,7 +58,7 @@ const NagercoilPage = () => {
                     {JSON.stringify({
                         "@context": "https://schema.org",
                         "@type": "LocalBusiness",
-                        "name": "LMK SoftTech - Software Company Nagercoil",
+                        "name": "LMK | LMK SoftTech - Software Company Nagercoil",
                         "image": "https://www.lmksofttech.in/lmk-logo.webp",
                         "description": "Best software company in Nagercoil offering web development, mobile app development, and custom software solutions.",
                         "address": {
