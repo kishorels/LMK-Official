@@ -2,12 +2,15 @@ import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import {
   User, Award, Briefcase, Heart, Target, Rocket,
-  Code2, Sparkles, Zap, Star, ArrowRight, CheckCircle2
+  Code2, Sparkles, Zap, Star, ArrowRight, CheckCircle2, FileText
 } from 'lucide-react';
 import { Badge } from '../ui/badge';
 import { Link } from 'react-router-dom';
 
+const MSME_CERTIFICATE_URL = '/Print%20_%20Udyam%20Registration%20Certificate.PDF';
+
 const stats = [
+  { value: 'MSME', label: 'Registered Company', icon: Award, color: 'from-amber-500 to-orange-500' },
   { value: '100%', label: 'Client Satisfaction', icon: Heart, color: 'from-pink-500 to-rose-500' },
   { value: '24/7', label: 'Support Available', icon: Zap, color: 'from-indigo-500 to-purple-500' },
 ];
@@ -191,7 +194,7 @@ export const AboutSection = () => {
             </span>
           </h2>
           <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
-            We're passionate about transforming ideas into exceptional digital experiences.
+            LMK SoftTech is an MSME registered software company passionate about transforming ideas into exceptional digital experiences.
             Our commitment to innovation and quality drives everything we do.
           </p>
         </motion.div>
@@ -306,7 +309,7 @@ export const AboutSection = () => {
                 Building Digital Excellence, One Project at a Time
               </h3>
               <p className="text-slate-600 leading-relaxed mb-4">
-                At LMK SoftTech, we believe in the power of technology to transform businesses.
+                At LMK SoftTech, an MSME registered company, we believe in the power of technology to transform businesses.
                 We bring a unique blend of technical expertise and creative vision to every project,
                 ensuring your digital presence stands out in today's competitive landscape.
               </p>
@@ -314,6 +317,21 @@ export const AboutSection = () => {
                 Our mission is simple: to help businesses thrive in the digital age by delivering
                 innovative, high-quality solutions that drive growth and success.
               </p>
+
+              <a
+                href={MSME_CERTIFICATE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 inline-flex items-center gap-3 rounded-xl border border-teal-200 bg-white px-5 py-3 text-sm font-semibold text-slate-800 shadow-sm transition-all hover:border-teal-300 hover:text-teal-700 hover:shadow-md"
+              >
+                <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-teal-50 text-teal-600">
+                  <FileText className="h-5 w-5" />
+                </span>
+                <span>
+                  View MSME Registration Certificate
+                  <span className="block text-xs font-medium text-slate-500">Udyam registration document</span>
+                </span>
+              </a>
             </div>
 
             {/* Values Grid */}

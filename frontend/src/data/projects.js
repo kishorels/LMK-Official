@@ -3,6 +3,20 @@ import { Globe, Smartphone, Server } from 'lucide-react';
 export const projects = [
     {
         id: 1,
+        slug: 'nextgen-campus',
+        title: 'Nextgen Campus Erp',
+        category: 'Web App',
+        description: 'IT  helps schools manage students, teachers, classes, attendance, exams, marks, fees, timetables, notices, reports, and daily administration in one simple system.',
+        image: '/no-logo1.png',
+        icon: Smartphone,
+        gradient: 'from-indigo-500 to-purple-500',
+        bgGradient: 'from-indigo-500/20 via-purple-500/10 to-transparent',
+        url: 'https://nextgencamp.in/',
+        featured: true,
+        keywords: ['erp software kanyakumari', 'school management software nagercoil', 'online erp']
+    },
+    {
+        id: 2,
         slug: 'ecommerce-site',
         title: 'E-commerce Platform',
         category: 'Website',
@@ -14,19 +28,7 @@ export const projects = [
         featured: true,
         keywords: ['ecommerce website nagercoil', 'online store kanyakumari', 'shopping website tamil nadu']
     },
-    {
-        id: 2,
-        slug: 'medbook-app',
-        title: 'MedBook Healthcare App',
-        category: 'Mobile App',
-        description: 'MedBook is a comprehensive healthcare platform featuring role-based access for patients, doctors, and hospitals, offering appointment booking, AI-powered health assistance, and medical record management.',
-        image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?crop=entropy&cs=srgb&fm=webp&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwxfHxkb2N0b3IlMjBhcHBvaW50bWVudHxlbnwwfHx8fDE3MzgyNDU2MDB8MA&ixlib=rb-4.1.0&q=75&w=600',
-        icon: Smartphone,
-        gradient: 'from-indigo-500 to-purple-500',
-        bgGradient: 'from-indigo-500/20 via-purple-500/10 to-transparent',
-        featured: true,
-        keywords: ['healthcare app development', 'doctor appointment app', 'medical software kanyakumari']
-    },
+   
     {
         id: 3,
         slug: 'church-presentation-software',

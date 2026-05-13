@@ -1,9 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Github, Linkedin, Twitter } from 'lucide-react';
+import { Mail, Phone, MapPin, Github, Linkedin, Twitter, FileText } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const LOGO_URL = '/lmk-logo.webp';
+const MSME_CERTIFICATE_URL = '/Print%20_%20Udyam%20Registration%20Certificate.PDF';
 
 const footerLinks = {
   services: [
@@ -50,7 +51,7 @@ export const Footer = () => {
               />
             </motion.a>
             <p className="mt-4 text-muted-foreground max-w-md">
-              LMK SoftTech is the leading software company in Nagercoil. We create innovative websites,
+              LMK SoftTech is an MSME registered software company in Nagercoil. We create innovative websites,
               mobile apps, and software solutions that drive business growth through
               cutting-edge technology and user-centric design.
             </p>
@@ -111,6 +112,17 @@ export const Footer = () => {
                 </div>
                 Nagercoil, Tamil Nadu, India
               </div>
+              <a
+                href={MSME_CERTIFICATE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors text-sm group"
+              >
+                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                  <FileText size={16} className="text-primary" />
+                </div>
+                MSME Registration
+              </a>
             </div>
           </div>
         </div>
