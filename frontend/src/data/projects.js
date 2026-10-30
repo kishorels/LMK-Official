@@ -3,32 +3,6 @@ import { Globe, Smartphone, Server } from 'lucide-react';
 export const projects = [
     {
         id: 1,
-        slug: 'lmsk-music',
-        title: 'LMSK Music Player & Streamer',
-        category: 'Mobile App',
-        description: 'An advanced Android music streaming app featuring unlimited high-quality cloud audio streaming, Tamil mood feeds, real-time karaoke vocal cut, synchronized lyrics, live audio visualizers, caller tune setup, and built-in arcade games (Beat Runner, Brick Breaker). Built with Kotlin and Jetpack Compose.',
-        image: '/lmsk-music.webp',
-        icon: Smartphone,
-        gradient: 'from-purple-500 via-pink-500 to-rose-500',
-        bgGradient: 'from-purple-500/20 via-pink-500/10 to-transparent',
-        url: 'https://drive.google.com/drive/folders/13O7vLYDz0dYkSHUwmKhGmukkH7AeU4mZ?usp=sharing',
-        featured: true,
-        keywords: ['music streaming app nagercoil', 'android app development kanyakumari', 'tamil music app', 'lmsk music', 'kotlin app developer'],
-        features: [
-            'High-Quality Cloud Music Streaming',
-            'Massive Online Music Catalog & Smart Search',
-            'Real-Time Karaoke Vocal Cut & Synchronized Lyrics',
-            'Tamil Mood Vibes & Curated Daily Playlists',
-            'Built-in Arcade Games (Play While Listening)',
-            'Direct CallerTune Setup (Jio / Airtel / Vi)',
-            'Live Waveform & Retro Visualizers',
-            'Background Audio Playback (Media3 ExoPlayer)',
-            'Offline Song Downloads & Sleep Timer'
-        ],
-        actionLabel: 'Download Android APK'
-    },
-    {
-        id: 2,
         slug: 'nextgen-campus',
         title: 'Nextgen Campus Erp',
         category: 'Software',
@@ -50,7 +24,7 @@ export const projects = [
         ]
     },
     {
-        id: 3,
+        id: 2,
         slug: 'ecommerce-site',
         title: 'E-commerce Platform',
         category: 'Website',
@@ -71,7 +45,7 @@ export const projects = [
         ]
     },
     {
-        id: 4,
+        id: 3,
         slug: 'church-presentation-software',
         title: 'Church Presentation Software',
         category: 'Software',
