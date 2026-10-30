@@ -104,9 +104,10 @@ export const Navigation = () => {
             <div className="hidden md:block">
               <Link to="/contact">
                 <Button
-                  className="bg-gradient-to-r from-teal-500 to-indigo-500 hover:from-teal-600 hover:to-indigo-600 text-white font-semibold px-6 py-2.5 rounded-full transition-all duration-300"
+                  id="nav-start-project-btn"
+                  className="bg-gradient-to-r from-teal-500 to-indigo-500 hover:from-teal-600 hover:to-indigo-600 text-white font-semibold px-6 py-2.5 rounded-full transition-all duration-300 cursor-pointer shadow-md"
                 >
-                  Get Started
+                  Start Your Project
                   <ChevronRight className="w-4 h-4 ml-1" />
                 </Button>
               </Link>
@@ -172,10 +173,11 @@ export const Navigation = () => {
                 >
                   <Link to="/contact" className="block">
                     <Button
-                      className="w-full bg-gradient-to-r from-teal-500 to-indigo-500 hover:from-teal-600 hover:to-indigo-600 text-white font-semibold py-4 rounded-xl"
+                      id="mobile-start-project-btn"
+                      className="w-full bg-gradient-to-r from-teal-500 to-indigo-500 hover:from-teal-600 hover:to-indigo-600 text-white font-semibold py-4 rounded-xl cursor-pointer"
                       size="lg"
                     >
-                      Get Started
+                      Start Your Project
                       <ChevronRight className="w-5 h-5 ml-2" />
                     </Button>
                   </Link>

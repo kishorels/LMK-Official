@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, memo } from 'react';
 import { Sparkles, Code2, Smartphone, Server } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 // Optimized but fully Interactive Particles
 const Particles = memo(() => {
@@ -140,6 +141,7 @@ const Particles = memo(() => {
 });
 
 export default function HeroSection() {
+  const navigate = useNavigate();
   const services = [
     { icon: Code2, label: 'Web Development', desc: 'Modern & Responsive', gradient: 'from-teal-500 to-cyan-500' },
     { icon: Smartphone, label: 'App Development', desc: 'iOS & Android', gradient: 'from-indigo-500 to-purple-500' },
@@ -179,14 +181,22 @@ export default function HeroSection() {
 
             <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
               <button
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-8 py-4 rounded-xl bg-teal-500 text-white font-bold transition-all hover:bg-teal-600 hover:scale-105 active:scale-95 shadow-lg shadow-teal-500/20"
+                id="hero-start-project-btn"
+                onClick={() => {
+                  const contactEl = document.getElementById('contact');
+                  if (contactEl) {
+                    contactEl.scrollIntoView({ behavior: 'smooth' });
+                  } else {
+                    navigate('/contact');
+                  }
+                }}
+                className="px-8 py-4 rounded-xl bg-teal-500 text-white font-bold transition-all hover:bg-teal-600 hover:scale-105 active:scale-95 shadow-lg shadow-teal-500/20 cursor-pointer"
               >
                 Start Your Project
               </button>
               <button
                 onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-8 py-4 rounded-xl bg-white/5 text-white font-bold border border-white/10 transition-all hover:bg-white/10"
+                className="px-8 py-4 rounded-xl bg-white/5 text-white font-bold border border-white/10 transition-all hover:bg-white/10 cursor-pointer"
               >
                 Our Services
               </button>

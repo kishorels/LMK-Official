@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import { ArrowLeft, ExternalLink, Globe, Smartphone, Server, CheckCircle2, ArrowRight } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Globe, Smartphone, Server, CheckCircle2, ArrowRight, Download } from 'lucide-react';
 import { projects } from '../data/projects';
 import { Button } from '../components/ui/button';
 
@@ -25,6 +25,11 @@ const ProjectDetailPage = () => {
         );
     }
 
+    const defaultFeatures = ['Advanced UI/UX', 'Cloud Integration', 'SEO Optimized', 'Mobile First'];
+    const featuresList = project.features && project.features.length > 0 ? project.features : defaultFeatures;
+    const isDownloadAction = project.category === 'Mobile App' || (project.actionLabel && project.actionLabel.toLowerCase().includes('download'));
+    const actionButtonText = project.actionLabel || (project.category === 'Mobile App' ? 'Download Android APK' : 'View Live Project');
+
     return (
         <div className="min-h-screen pt-24 pb-16 bg-white">
             <Helmet>
@@ -46,12 +51,12 @@ const ProjectDetailPage = () => {
                     <motion.div
                         initial={{ opacity: 0, x: -30 }}
                         animate={{ opacity: 1, x: 0 }}
-                        className="relative rounded-3xl overflow-hidden shadow-2xl"
+                        className="relative rounded-3xl overflow-hidden shadow-2xl bg-slate-950 flex items-center justify-center"
                     >
                         <img
                             src={project.image}
                             alt={project.title}
-                            className="w-full h-auto object-cover"
+                            className="w-full h-auto max-h-[500px] object-contain"
                         />
                         <div className={`absolute inset-0 bg-gradient-to-t ${project.bgGradient} opacity-30`} />
                     </motion.div>
@@ -78,9 +83,9 @@ const ProjectDetailPage = () => {
                         <div className="space-y-4 mb-10">
                             <h3 className="font-bold text-slate-900">Key Features:</h3>
                             <div className="grid sm:grid-cols-2 gap-3">
-                                {['Advanced UI/UX', 'Cloud Integration', 'SEO Optimized', 'Mobile First'].map((feature) => (
+                                {featuresList.map((feature) => (
                                     <div key={feature} className="flex items-center gap-2 text-slate-600">
-                                        <CheckCircle2 className="w-5 h-5 text-teal-500" />
+                                        <CheckCircle2 className="w-5 h-5 text-teal-500 shrink-0" />
                                         <span>{feature}</span>
                                     </div>
                                 ))}
@@ -90,9 +95,13 @@ const ProjectDetailPage = () => {
                         <div className="flex flex-col sm:flex-row gap-4">
                             {project.url ? (
                                 <a href={project.url} target="_blank" rel="noopener noreferrer" className="flex-1">
-                                    <Button className={`w-full bg-gradient-to-r ${project.gradient} text-white py-6 rounded-xl font-bold`}>
-                                        View Live Project
-                                        <ExternalLink className="w-5 h-5 ml-2" />
+                                    <Button className={`w-full bg-gradient-to-r ${project.gradient} text-white py-6 rounded-xl font-bold hover:opacity-95 shadow-lg cursor-pointer`}>
+                                        {actionButtonText}
+                                        {isDownloadAction ? (
+                                            <Download className="w-5 h-5 ml-2" />
+                                        ) : (
+                                            <ExternalLink className="w-5 h-5 ml-2" />
+                                        )}
                                     </Button>
                                 </a>
                             ) : (
@@ -101,7 +110,7 @@ const ProjectDetailPage = () => {
                                 </Button>
                             )}
                             <Link to="/contact" className="flex-1">
-                                <Button variant="outline" className="w-full py-6 rounded-xl font-bold border-2 border-slate-200">
+                                <Button variant="outline" className="w-full py-6 rounded-xl font-bold border-2 border-slate-200 cursor-pointer hover:border-slate-300">
                                     Hire Us for Similar Project
                                     <ArrowRight className="w-5 h-5 ml-2" />
                                 </Button>

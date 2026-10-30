@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import {
   FolderOpen, ExternalLink, Globe, Smartphone, Server, X,
-  ArrowRight, Star, Layers, Sparkles
+  ArrowRight, Star, Layers, Sparkles, Download
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { projects } from '../../data/projects';
@@ -177,8 +177,8 @@ const ProjectModal = ({ project, onClose }) => (
               whileTap={{ scale: 0.98 }}
               className={`w-full flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r ${project.gradient} text-white font-semibold rounded-xl transition-all`}
             >
-              <ExternalLink className="w-5 h-5" />
-              View Live Project
+              {project.category === 'Mobile App' || (project.actionLabel && project.actionLabel.toLowerCase().includes('download')) ? (<Download className="w-5 h-5" />) : (<ExternalLink className="w-5 h-5" />)}
+              {project.actionLabel || (project.category === 'Mobile App' ? 'Download Android APK' : 'View Live Project')}
               <ArrowRight className="w-4 h-4" />
             </motion.button>
           </a>
